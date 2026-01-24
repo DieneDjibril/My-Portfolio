@@ -1,3 +1,15 @@
+/**
+ * Fichier centralisant toutes les données du portfolio
+ * 
+ * Ce fichier contient :
+ * - personalInfo : Informations personnelles et bio
+ * - skills : Liste des compétences techniques
+ * - experiences : Historique des emplois et projets
+ * - education : Formation académique
+ * 
+ * Toutes les données sont exportées et utilisées par les composants React
+ */
+
 import {
     Code2,
     Layout,
@@ -9,50 +21,80 @@ import {
     PenTool
 } from 'lucide-react';
 
+/**
+ * Informations personnelles du développeur
+ * Utilisé dans Hero et About sections
+ */
 export const personalInfo = {
-    name: "Djibril Tambadou DIENE",
-    title: "Développeur Web Fullstack Senior",
-    email: "djibsondiene@gmail.com",
-    phone: "78 136 59 45",
-    address: "HLM 5 villa 1790 Dakar, Sénégal",
-    bio: "Développeur Web passionné et Freelance spécialisé dans la création d'applications web modernes. Maîtrise des technologies Front-end et Back-end. Rigoureux, autonome et orienté solutions, je m'adapte rapidement pour livrer des projets robustes et évolutifs.",
+    name: "Djibril Tambadou DIENE", // Nom complet
+    title: "Développeur Web Fullstack Senior", // Titre professionnel
+    email: "djibsondiene@gmail.com", // Email de contact
+    phone: "78 136 59 45", // Téléphone
+    address: "HLM 5 villa 1790 Dakar, Sénégal", // Adresse
+    bio: "Développeur Web passionné et Freelance spécialisé dans la création d'applications web modernes. Maîtrise des technologies Front-end et Back-end. Rigoureux, autonome et orienté solutions, je m'adapte rapidement pour livrer des projets robustes et évolutifs.", // Biographie
     socials: {
-        github: "#",
-        linkedin: "#",
-        twitter: "#"
+        github: "#", // Lien GitHub
+        linkedin: "#", // Lien LinkedIn
+        twitter: "#" // Lien Twitter
     }
 };
 
+/**
+ * Liste des compétences techniques
+ * Utilisé dans la section Skills
+ * Groupées par catégorie (Frontend, Backend, Languages, Tools, CMS, IT Support)
+ */
 export const skills = [
+    // Frontend
     { name: "React / Vite", icon: Code2, level: 90, category: "Frontend" },
     { name: "Tailwind CSS", icon: Layout, level: 95, category: "Frontend" },
-    { name: "JavaScript (ES6+)", icon: Code2, level: 85, category: "Languages" },
     { name: "Angular", icon: Globe, level: 80, category: "Frontend" },
-    { name: "Spring Boot", icon: Server, level: 75, category: "Backend" },
+    
+    // Langages de programmation
+    { name: "JavaScript (ES6+)", icon: Code2, level: 85, category: "Languages" },
     { name: "Java", icon: Code2, level: 75, category: "Languages" },
+    
+    // Backend
+    { name: "Spring Boot", icon: Server, level: 75, category: "Backend" },
+    
+    // CMS
     { name: "WordPress / WooCommerce", icon: Globe, level: 85, category: "CMS" },
+    
+    // Outils
     { name: "Git / GitHub", icon: Database, level: 80, category: "Tools" },
+    
+    // Marketing
     { name: "SEO Optimization", icon: Globe, level: 70, category: "Marketing" },
+    
+    // Support IT
     { name: "Windows Server / Admin", icon: Cpu, level: 70, category: "IT Support" },
 ];
 
+/**
+ * Liste des expériences professionnelles
+ * Utilisé dans la section Experience
+ * Chaque expérience peut avoir des projets associés
+ */
 export const experiences = [
+    // Expérience 1 : Freelance actuel
     {
         id: 1,
-        role: "Développeur Web Freelance",
-        company: "Freelance",
-        location: "Dakar, Sénégal",
-        period: "01/2023 – Présent",
-        description: "Création et maintenance de sites web et applications e-commerce.",
-        projects: [
+        role: "Développeur Web Freelance", // Poste
+        company: "Freelance", // Entreprise
+        location: "Dakar, Sénégal", // Localisation
+        period: "01/2023 – Présent", // Durée
+        description: "Création et maintenance de sites web et applications e-commerce.", // Descriion
+        projects: [ // Projets réalisés
             {
-                name: "GSC E-Shop",
-                url: "gsceshop.com",
-                tech: ["WordPress", "WooCommerce", "SEO"],
-                details: "Développement complet du site E-commerce, optimisation SEO et mises à jour récurrentes."
+                name: "GSC E-Shop", // Nom du projet
+                url: "gsceshop.com", // URL du projet
+                tech: ["WordPress", "WooCommerce", "SEO"], // Technologies utilisées
+                details: "Développement complet du site E-commerce, optimisation SEO et mises à jour récurrentes." // Détails du projet
             }
         ]
     },
+    
+    // Expérience 2 : Support IT
     {
         id: 2,
         role: "Technicien Support IT",
@@ -61,6 +103,8 @@ export const experiences = [
         period: "Missions ponctuelles",
         description: "Installation et réparation de matériel informatique, résolution de problèmes logiciels."
     },
+    
+    // Expérience 3 : Stage Groupe La Poste
     {
         id: 3,
         role: "Stagiaire Développeur FullStack",
@@ -78,6 +122,10 @@ export const experiences = [
     }
 ];
 
+/**
+ * Formation académique
+ * Utilisé dans la section About
+ */
 export const education = [
     {
         id: 1,
