@@ -13,6 +13,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { personalInfo } from '../../data/portfolioData';
+// Importer le CV depuis les assets
+import CVFile from '../../assets/C.V Djibril Diene.pdf';
 
 /**
  * Hero Component
@@ -35,7 +37,7 @@ export const Hero = () => {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                         </span>
-                        Disponible pour Freelance
+                        Disponible pour travailler en entreprise ou en freelance
                     </motion.div>
 
                     {/* Titre principal avec gradient */}
@@ -81,7 +83,14 @@ export const Hero = () => {
                         <Button 
                             variant="secondary" 
                             icon={Download} 
-                            onClick={() => window.open('/cv.pdf', '_blank')}
+                            onClick={() => {
+                                const link = document.createElement('a');
+                                link.href = CVFile; // Utiliser le CV importé
+                                link.download = 'CV_Djibril_Diene.pdf'; // Nom du fichier téléchargé
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                            }}
                         >
                             Mon CV
                         </Button>
@@ -95,12 +104,12 @@ export const Hero = () => {
                         className="mt-20 flex justify-center items-center gap-10"
                     >
                         {/* Lien GitHub */}
-                        <a href="#" className="group flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors">
+                        <a href="https://github.com/DieneDjibril" className="group flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors">
                             <Github className="w-6 h-6" />
                             <span className="text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">GitHub</span>
                         </a>
                         {/* Lien LinkedIn */}
-                        <a href="#" className="group flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors">
+                        <a href="https://www.linkedin.com/in/djibril-diene-352a941bb/" className="group flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors">
                             <Linkedin className="w-6 h-6" />
                             <span className="text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">LinkedIn</span>
                         </a>

@@ -27,10 +27,10 @@ export const Contact = () => {
 
                         <div className="space-y-8">
                             <div className="flex gap-10">
-                                <a href="#" className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-500 hover:text-white hover:border-white/30 hover:scale-110 transition-all duration-500">
+                                <a href="https://github.com/DieneDjibril" className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-500 hover:text-white hover:border-white/30 hover:scale-110 transition-all duration-500">
                                     <Github size={24} />
                                 </a>
-                                <a href="#" className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-500 hover:text-white hover:border-white/30 hover:scale-110 transition-all duration-500">
+                                <a href="https://www.linkedin.com/in/djibril-diene-352a941bb/" className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-500 hover:text-white hover:border-white/30 hover:scale-110 transition-all duration-500">
                                     <Linkedin size={24} />
                                 </a>
                                 <a href="#" className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-500 hover:text-white hover:border-white/30 hover:scale-110 transition-all duration-500">

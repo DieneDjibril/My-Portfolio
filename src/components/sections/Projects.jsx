@@ -58,7 +58,7 @@ export const Projects = () => {
                                             </p>
                                         </div>
                                         <div className="flex gap-4">
-                                            <a href="#" className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
                                                 <Github className="w-5 h-5" />
                                             </a>
                                             {project.url && (

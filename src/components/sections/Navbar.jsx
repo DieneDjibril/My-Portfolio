@@ -59,7 +59,7 @@ export const Navbar = () => {
                         <Code2 size={24} />
                     </div>
                     {/* Texte du logo avec point bleu */}
-                    <span className="tracking-tighter">Djibril<span className="text-blue-500">.</span></span>
+                    <span className="tracking-tighter">ChefLivai<span className="text-blue-500">.</span></span>
                 </a>
 
                 {/* Navigation desktop (cachée sur mobile) */}

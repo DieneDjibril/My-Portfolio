@@ -2,7 +2,7 @@
  * Composant Skills (Section des Compétences)
  * 
  * Affiche les compétences techniques groupées par catégories :
- * - Frontend, Backend, Langages, Outils, CMS, IT Support
+ * - Frontend, Backend, Langages, Bases de données, Outils, Design, Marketing & CMS, Sécurité, IT Support
  * - Pour chaque compétence : icône, nom, niveau (barre de progression)
  * - Animations d'apparition au scroll
  */
@@ -18,7 +18,7 @@ import { skills } from '../../data/portfolioData';
  */
 export const Skills = () => {
     // Catégories de compétences disponibles
-    const categories = ["Frontend", "Backend", "Languages", "Tools", "CMS", "IT Support"];
+    const categories = ["Frontend", "Backend", "Languages", "Database", "Tools", "Design", "Marketing & CMS", "Security", "IT Support"];
 
     /**
      * Filtre les compétences par catégorie
@@ -26,6 +26,10 @@ export const Skills = () => {
      * @returns {Array} Les compétences de cette catégorie
      */
     const getSkillsByCategory = (category) => {
+        // Si c'est la catégorie combinée "Marketing & CMS"
+        if (category === "Marketing & CMS") {
+            return skills.filter(skill => skill.category === "CMS" || skill.category === "Marketing");
+        }
         return skills.filter(skill => skill.category === category);
     };
 

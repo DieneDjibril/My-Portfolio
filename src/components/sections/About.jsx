@@ -8,6 +8,7 @@
  * - Langues parlées
  */
 
+import { motion } from 'framer-motion';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Card } from '../ui/Card';
 import { personalInfo, education, languages } from '../../data/portfolioData';
@@ -87,13 +88,20 @@ export const About = () => {
                                     <h3 className="text-lg font-bold">Formation</h3>
                                 </div>
                                 <div className="space-y-6">
-                                    {education.slice(0, 2).map(edu => (
-                                        <div key={edu.id} className="relative pl-6 border-l border-white/10">
+                                    {education.map((edu, index) => (
+                                        <motion.div 
+                                            key={edu.id}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: index * 0.1 }}
+                                            className="relative pl-6 border-l border-white/10"
+                                        >
                                             <div className="absolute left-[-5px] top-1.5 w-2 h-2 bg-purple-500 rounded-full" />
                                             <p className="text-xs text-neutral-500 mb-1">{edu.year}</p>
                                             <h4 className="text-sm font-bold text-white leading-tight mb-1">{edu.degree}</h4>
                                             <p className="text-xs text-neutral-400">{edu.school}</p>
-                                        </div>
+                                        </motion.div>
                                     ))}
                                 </div>
                             </Card>
@@ -106,14 +114,21 @@ export const About = () => {
                                     <h3 className="text-lg font-bold">Expertise linguistique</h3>
                                 </div>
                                 <div className="space-y-4">
-                                    {languages.map(lang => (
-                                        <div key={lang.language} className="flex justify-between items-center group">
+                                    {languages.map((lang, index) => (
+                                        <motion.div 
+                                            key={lang.language}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: index * 0.1 }}
+                                            className="flex justify-between items-center group"
+                                        >
                                             <span className="text-white font-medium">{lang.language}</span>
                                             <div className="flex items-center gap-2">
                                                 <span className="text-xs text-neutral-500">{lang.level}</span>
                                                 <div className="w-1.5 h-1.5 bg-green-500 rounded-full opacity-50 group-hover:opacity-100 transition-opacity" />
                                             </div>
-                                        </div>
+                                        </motion.div>
                                     ))}
                                 </div>
                             </Card>
