@@ -1,141 +1,99 @@
-/**
- * Composant About (Section À propos)
- * 
- * Affiche les informations personnelles du développeur :
- * - Carte avec photo/emoji et coordonnées
- * - Biographie détaillée
- * - Formation académique
- * - Langues parlées
- */
-
-import { motion } from 'framer-motion';
+import { GraduationCap, Languages, Sparkles, Heart } from 'lucide-react';
+import { useContent } from '../../i18n/context';
 import { SectionTitle } from '../ui/SectionTitle';
+import { Reveal } from '../ui/Reveal';
 import { Card } from '../ui/Card';
-import { personalInfo, education, languages } from '../../data/portfolioData';
-import { GraduationCap, Languages, User, MapPin, Mail, Phone } from 'lucide-react';
 
+export function About() {
+  const { about, ui } = useContent();
+  const t = ui.about;
+  return (
+    <section id="about" aria-labelledby="about-title" className="relative py-24 md:py-32">
+      <div className="container-page">
+        <SectionTitle id="about-title" index="01" kicker={ui.sections.about.kicker} title={ui.sections.about.title} />
 
-/**
- * About Component
- * Affiche la section À propos avec informations personnelles et formation
- */
-export const About = () => {
-    return (
-        <section id="about" className="py-32 relative">
-            <div className="container mx-auto px-6">
-                {/* Titre de la section */}
-                <SectionTitle
-                    title="Le Profil"
-                    subtitle="Développeur Fullstack Senior basé à Dakar, passionné par l'architecture logicielle et l'expérience utilisateur."
-                />
+        <div className="grid gap-6 lg:grid-cols-[1.25fr_1fr]">
+          {/* Bio + qualités */}
+          <Reveal>
+            <Card className="h-full p-6 sm:p-8">
+              <div className="space-y-4 text-base leading-relaxed text-muted sm:text-lg">
+                {about.bio.map((p) => (
+                  <p key={p.slice(0, 24)}>{p}</p>
+                ))}
+              </div>
+              <h3 className="mt-8 mb-3 flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-brand-300 uppercase">
+                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" /> {t.qualities}
+              </h3>
+              <ul className="flex flex-wrap gap-2">
+                {about.qualities.map((q) => (
+                  <li key={q} className="rounded-full border border-brand-400/20 bg-brand-500/10 px-3.5 py-1.5 text-sm text-text">
+                    {q}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </Reveal>
 
-                {/* Grille : Carte profil + Infos */}
-                <div className="grid lg:grid-cols-3 gap-8">
-                    {/* Colonne 1 : Carte avec infos de contact */}
-                    <Card className="lg:col-span-1">
-                        <div className="flex flex-col items-center text-center">
-                            {/* Avatar emoji */}
-                            <div className="w-32 h-32 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-3xl mb-6 flex items-center justify-center text-5xl shadow-2xl shadow-blue-500/20">
-                                👨‍💻
-                            </div>
-                            
-                            {/* Nom et titre */}
-                            <h3 className="text-2xl font-bold mb-2">{personalInfo.name}</h3>
-                            <p className="text-blue-400 font-medium mb-8">Développeur FullStack</p>
+          {/* Langues + centres d'intérêt */}
+          <div className="grid gap-6">
+            <Reveal delay={0.08}>
+              <Card className="p-6 sm:p-8">
+                <h3 className="mb-5 flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-brand-300 uppercase">
+                  <Languages className="h-3.5 w-3.5" aria-hidden="true" /> {t.languages}
+                </h3>
+                <ul className="space-y-3">
+                  {about.languages.map((l) => (
+                    <li key={l.name} className="flex items-baseline justify-between gap-4 border-b border-line pb-3 last:border-0 last:pb-0">
+                      <span className="font-display text-lg font-semibold text-text">{l.name}</span>
+                      <span className="font-mono text-xs text-muted">{l.level}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            </Reveal>
+            <Reveal delay={0.16}>
+              <Card className="p-6 sm:p-8">
+                <h3 className="mb-4 flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-brand-300 uppercase">
+                  <Heart className="h-3.5 w-3.5" aria-hidden="true" /> {t.interests}
+                </h3>
+                <ul className="flex flex-wrap gap-2">
+                  {about.interests.map((i) => (
+                    <li key={i} className="rounded-full border border-line px-3.5 py-1.5 text-sm text-muted">
+                      {i}
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            </Reveal>
+          </div>
+        </div>
 
-                            {/* Infos de contact */}
-                            <div className="w-full space-y-4 text-left border-t border-white/5 pt-8">
-                                {/* Email */}
-                                <div className="flex items-center gap-4 text-neutral-400">
-                                    <div className="p-2.5 bg-white/5 rounded-lg"><Mail size={18} /></div>
-                                    <span className="text-sm truncate">{personalInfo.email}</span>
-                                </div>
-                                {/* Téléphone */}
-                                <div className="flex items-center gap-4 text-neutral-400">
-                                    <div className="p-2.5 bg-white/5 rounded-lg"><Phone size={18} /></div>
-                                    <span className="text-sm">{personalInfo.phone}</span>
-                                </div>
-                                {/* Adresse */}
-                                <div className="flex items-center gap-4 text-neutral-400">
-                                    <div className="p-2.5 bg-white/5 rounded-lg"><MapPin size={18} /></div>
-                                    <span className="text-sm">{personalInfo.address}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-
-                    {/* Colonne 2 & 3 : Biographie, formation et langues */}
-                    <div className="lg:col-span-2 flex flex-col gap-8">
-                        {/* Carte biographie */}
-                        <Card className="flex-1">
-                            <div className="flex items-center gap-3 mb-8">
-                                <div className="p-2.5 bg-blue-500/10 rounded-xl text-blue-500">
-                                    <User size={24} />
-                                </div>
-                                <h3 className="text-xl font-bold">À propos de moi</h3>
-                            </div>
-                            <p className="text-neutral-400 text-lg leading-relaxed italic">
-                                "{personalInfo.bio}"
-                            </p>
-                        </Card>
-
-                        <div className="grid md:grid-cols-2 gap-8">
-                            <Card>
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="p-2 bg-purple-500/10 rounded-lg text-purple-500">
-                                        <GraduationCap size={20} />
-                                    </div>
-                                    <h3 className="text-lg font-bold">Formation</h3>
-                                </div>
-                                <div className="space-y-6">
-                                    {education.map((edu, index) => (
-                                        <motion.div 
-                                            key={edu.id}
-                                            initial={{ opacity: 0, x: -20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: index * 0.1 }}
-                                            className="relative pl-6 border-l border-white/10"
-                                        >
-                                            <div className="absolute left-[-5px] top-1.5 w-2 h-2 bg-purple-500 rounded-full" />
-                                            <p className="text-xs text-neutral-500 mb-1">{edu.year}</p>
-                                            <h4 className="text-sm font-bold text-white leading-tight mb-1">{edu.degree}</h4>
-                                            <p className="text-xs text-neutral-400">{edu.school}</p>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </Card>
-
-                            <Card>
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="p-2 bg-green-500/10 rounded-lg text-green-500">
-                                        <Languages size={20} />
-                                    </div>
-                                    <h3 className="text-lg font-bold">Expertise linguistique</h3>
-                                </div>
-                                <div className="space-y-4">
-                                    {languages.map((lang, index) => (
-                                        <motion.div 
-                                            key={lang.language}
-                                            initial={{ opacity: 0, x: -20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: index * 0.1 }}
-                                            className="flex justify-between items-center group"
-                                        >
-                                            <span className="text-white font-medium">{lang.language}</span>
-                                            <div className="flex items-center gap-2">
-                                                <span className="text-xs text-neutral-500">{lang.level}</span>
-                                                <div className="w-1.5 h-1.5 bg-green-500 rounded-full opacity-50 group-hover:opacity-100 transition-opacity" />
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </Card>
-                        </div>
-                    </div>
+        {/* Formation */}
+        <Reveal className="mt-16">
+          <h3 className="mb-6 flex items-center gap-2 font-display text-2xl font-bold text-text">
+            <GraduationCap className="h-6 w-6 text-brand-400" aria-hidden="true" /> {t.education}
+          </h3>
+        </Reveal>
+        <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {about.education.map((e, i) => (
+            <Reveal as="li" key={e.title} delay={(i % 3) * 0.06}>
+              <Card className={`h-full p-5 sm:p-6 ${e.upcoming ? 'border-dashed !border-brand-400/30' : ''}`}>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-mono text-sm font-medium text-brand-300">{e.year}</span>
+                  {e.upcoming && (
+                    <span className="rounded-full bg-brand-500/15 px-2.5 py-0.5 font-mono text-[0.65rem] tracking-wide text-brand-300 uppercase">
+                      {t.upcoming}
+                    </span>
+                  )}
                 </div>
-            </div>
-        </section>
-    );
-};
+                <p className="mt-3 font-display text-lg leading-snug font-semibold text-text">{e.title}</p>
+                <p className="mt-2 text-sm text-muted">{e.school}</p>
+                {e.note && <p className="mt-2 text-sm text-brand-300/90">{e.note}</p>}
+              </Card>
+            </Reveal>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
