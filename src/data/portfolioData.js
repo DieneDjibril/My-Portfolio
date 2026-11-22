@@ -170,10 +170,10 @@ export const services = [
   },
   {
     icon: PenTool,
-    title: 'Design UI/UX',
+    title: 'Design & graphisme',
     description:
-      "Wireframes, maquettes et prototypes sur Figma avant la première ligne de code : des interfaces claires, pensées pour vos utilisateurs.",
-    tags: ['Figma', 'UI/UX', 'Prototypage'],
+      "Maquettes et prototypes d'interfaces sur Figma, et supports visuels pour mes clients sur Canva : affiches, visuels pour les réseaux et la communication.",
+    tags: ['Figma', 'Canva', 'UI/UX', 'Affiches'],
   },
   {
     icon: Search,
@@ -207,7 +207,7 @@ export const skillGroups = [
   { title: 'Langages', icon: Code2, items: ['JavaScript (ES6+)', 'Java', 'PHP', 'Python'] },
   { title: 'Bases de données', icon: Database, items: ['MySQL', 'PostgreSQL', 'MongoDB'] },
   { title: 'CMS & e-commerce', icon: ShoppingCart, items: ['WordPress', 'WooCommerce', 'Shopify', 'SEO'] },
-  { title: 'Design', icon: Palette, items: ['Figma', 'UI/UX', 'Wireframing', 'Prototypage'] },
+  { title: 'Design', icon: Palette, items: ['Figma', 'Canva', 'UI/UX', 'Wireframing', 'Prototypage', 'Affiches & visuels'] },
   {
     title: 'Outils & méthodes',
     icon: Wrench,
@@ -225,7 +225,7 @@ export const skillGroups = [
 // Technos qui défilent dans le bandeau infini
 export const marqueeTech = [
   'React', 'Vite', 'Angular', 'Tailwind CSS', 'Spring Boot', 'Laravel', 'JavaScript', 'Java', 'PHP',
-  'Python', 'MySQL', 'PostgreSQL', 'MongoDB', 'WordPress', 'WooCommerce', 'Shopify', 'Figma',
+  'Python', 'MySQL', 'PostgreSQL', 'MongoDB', 'WordPress', 'WooCommerce', 'Shopify', 'Figma', 'Canva',
   'Git', 'Netlify', 'Flutter', 'Windows Server', 'Yeastar',
 ];
 
@@ -364,6 +364,6 @@ export const contact = {
   intro:
     'Site web, application, support IT ou formation : décrivez-moi votre besoin, je vous réponds rapidement.',
   // Doit correspondre aux <option> du formulaire caché dans index.html
-  projectTypes: ['Site web', 'Application', 'Design UI/UX', 'SEO', 'Support IT', 'Formation', 'Autre'],
+  projectTypes: ['Site web', 'Application', 'Design & graphisme', 'SEO', 'Support IT', 'Formation', 'Autre'],
   privacy: 'Vos informations servent uniquement à vous répondre.',
 };
