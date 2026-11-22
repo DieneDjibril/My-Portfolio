@@ -1,28 +1,58 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { AnimatePresence, m } from 'framer-motion';
-import { ArrowUpRight, Github } from 'lucide-react';
+import { ArrowUpRight, Eye, Github } from 'lucide-react';
 import { projectFilters, projects } from '../../data/portfolioData';
 import { cn, ease } from '../../lib/utils';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Reveal } from '../ui/Reveal';
 import { TiltCard } from '../ui/TiltCard';
+import { LivePreview } from '../ui/LivePreview';
 
-function ProjectCard({ project }) {
-  const { title, client, description, tags, image, link, github, githubLabel = 'Code source' } = project;
+function ProjectCard({ project, onPreview }) {
+  const { title, client, description, tags, image, link, preview, github, githubLabel = 'Code source' } = project;
+  const canPreview = Boolean(preview && link);
+
+  const visual = (
+    <>
+      <img
+        src={image}
+        alt={`Aperçu du projet ${title}`}
+        loading="lazy"
+        decoding="async"
+        width="800"
+        height="500"
+        className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+      />
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink-950/60 to-transparent" />
+      {canPreview && (
+        <span
+          aria-hidden="true"
+          className="glass absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-text"
+        >
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-300 opacity-75" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-300" />
+          </span>
+          Aperçu live
+        </span>
+      )}
+    </>
+  );
+
   return (
     <TiltCard className="flex h-full flex-col overflow-hidden">
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-line">
-        <img
-          src={image}
-          alt={`Aperçu du projet ${title}`}
-          loading="lazy"
-          decoding="async"
-          width="800"
-          height="500"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-        />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink-950/60 to-transparent" />
-      </div>
+      {canPreview ? (
+        <button
+          type="button"
+          onClick={() => onPreview(project)}
+          className="relative block aspect-[16/10] w-full overflow-hidden border-b border-line text-left"
+          aria-label={`Voir l'aperçu en direct de ${title}`}
+        >
+          {visual}
+        </button>
+      ) : (
+        <div className="relative aspect-[16/10] overflow-hidden border-b border-line">{visual}</div>
+      )}
 
       <div className="flex flex-1 flex-col p-6">
         <p className="font-mono text-[0.7rem] tracking-wide text-brand-300">{client}</p>
@@ -38,7 +68,17 @@ function ProjectCard({ project }) {
         </ul>
 
         {(link || github) && (
-          <div className="mt-6 flex flex-wrap gap-4 border-t border-line pt-5 text-sm font-medium">
+          <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 border-t border-line pt-5 text-sm font-medium">
+            {canPreview && (
+              <button
+                type="button"
+                onClick={() => onPreview(project)}
+                className="inline-flex items-center gap-1.5 text-brand-300 transition-colors hover:text-text"
+              >
+                <Eye className="h-4 w-4" aria-hidden="true" /> Aperçu live
+                <span className="sr-only">de {title}</span>
+              </button>
+            )}
             {link && (
               <a
                 href={link}
@@ -72,6 +112,8 @@ function ProjectCard({ project }) {
 
 export function Projects() {
   const [filter, setFilter] = useState(projectFilters[0]);
+  const [previewed, setPreviewed] = useState(null);
+  const closePreview = useCallback(() => setPreviewed(null), []);
   const visible = filter === projectFilters[0] ? projects : projects.filter((p) => p.category === filter);
 
   return (
@@ -123,13 +165,17 @@ export function Projects() {
                 transition={{ duration: 0.4, ease }}
               >
                 <Reveal className="h-full">
-                  <ProjectCard project={p} />
+                  <ProjectCard project={p} onPreview={setPreviewed} />
                 </Reveal>
               </m.li>
             ))}
           </AnimatePresence>
         </m.ul>
       </div>
+
+      <AnimatePresence>
+        {previewed && <LivePreview key={previewed.title} project={previewed} onClose={closePreview} />}
+      </AnimatePresence>
     </section>
   );
 }

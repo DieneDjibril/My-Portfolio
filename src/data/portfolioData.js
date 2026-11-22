@@ -28,12 +28,12 @@ import {
 } from 'lucide-react';
 
 import cvFile from '../assets/CV-Djibril-Diene.pdf';
-import imgPlaybook from '../assets/projects/advancing-partnerships.svg';
-import imgHealth from '../assets/projects/haske-health.svg';
+import imgPlaybook from '../assets/projects/advancing-partnerships.webp';
+import imgHealth from '../assets/projects/haske-health.webp';
 import imgShop from '../assets/projects/gsce-shop.svg';
 import imgPointage from '../assets/projects/pointage.svg';
 import imgReporting from '../assets/projects/reporting.svg';
-import imgPortfolio from '../assets/projects/portfolio.svg';
+import imgPortfolio from '../assets/projects/portfolio.webp';
 
 /* ------------------------------------------------------------------ */
 /* Infos personnelles                                                  */
@@ -261,6 +261,7 @@ export const projects = [
     category: 'Web',
     image: imgPlaybook,
     link: 'https://advancingpartnershipplaybook.netlify.app',
+    preview: true, // aperçu en direct dans une fenêtre (le site doit autoriser l'intégration en iframe)
   },
   {
     // URL Netlify provisoire, à remplacer par le domaine définitif
@@ -272,6 +273,7 @@ export const projects = [
     category: 'Web',
     image: imgHealth,
     link: 'https://haskehealth.netlify.app',
+    preview: true,
   },
   {
     title: 'GSCE-Shop',
@@ -280,7 +282,7 @@ export const projects = [
     tags: ['WordPress', 'WooCommerce', 'SEO'],
     category: 'Web',
     image: imgShop,
-    link: 'https://gsceshop.com',
+    // Domaine gsceshop.com expiré (en vente) : lien retiré, à remettre si le site revient en ligne
     github: 'https://github.com/DieneDjibril/GSCESHOP',
   },
   {

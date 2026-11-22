@@ -56,6 +56,8 @@ Quelques cas courants :
 - **Changer les types de projet du formulaire** : modifie `contact.projectTypes` **et** les `<option>` du formulaire caché dans `index.html` (Netlify lit cette version au build).
 
 Les sites Advancing Partnerships Playbook et Haskè Health pointent vers leurs URLs Netlify provisoires : mets à jour `link` quand les domaines définitifs seront en place.
+- **Aperçu en direct** : ajoute `preview: true` à un projet qui a un `link` pour afficher le bouton « Aperçu live » (le site s'ouvre dans une fenêtre, vue ordinateur ou mobile). Le site cible doit autoriser l'intégration en iframe : vérifie qu'il n'envoie pas d'en-tête `X-Frame-Options` ni de `frame-ancestors` restrictif (gsceshop.com, par exemple, l'interdisait).
+
 Pour un lien GitHub qui ne mène pas au code du projet, ajoute `githubLabel` (ex. `'Mon GitHub'`) ; sinon le bouton affiche « Code source ».
 
 ## Structure
