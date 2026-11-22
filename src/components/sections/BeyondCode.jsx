@@ -34,7 +34,7 @@ export function BeyondCode() {
           <Reveal delay={0.1}>
             <Card className="flex h-full flex-col justify-between gap-8 p-6 sm:p-8">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs tracking-[0.18em] text-brand-300 uppercase">Rocket League · Afrique</span>
+                <span className="font-mono text-xs tracking-[0.18em] text-brand-300 uppercase">Rocket League · Afrique · {beyondCode.highlightYear}</span>
                 <Trophy className="h-6 w-6 text-brand-300" aria-hidden="true" />
               </div>
               <p className="font-display text-6xl leading-none font-extrabold tracking-tight text-gradient sm:text-7xl">
@@ -43,7 +43,7 @@ export function BeyondCode() {
               <div>
                 <div className="flex justify-between font-mono text-[0.7rem] text-muted">
                   <span>Phase de groupes</span>
-                  <span className="text-brand-300">Top 4</span>
+                  <span className="text-brand-300">Top 4 · {beyondCode.highlightYear}</span>
                 </div>
                 <div className="mt-2 h-2 overflow-hidden rounded-full bg-ink-950">
                   <m.div

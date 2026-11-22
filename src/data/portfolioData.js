@@ -10,7 +10,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  MessageCircle,
   Layout,
   Server,
   Code2,
@@ -27,6 +26,7 @@ import {
   Presentation,
 } from 'lucide-react';
 
+import { WhatsAppIcon } from '../components/ui/WhatsAppIcon';
 import cvFile from '../assets/CV-Djibril-Diene.pdf';
 import imgPlaybook from '../assets/projects/advancing-partnerships.webp';
 import imgHealth from '../assets/projects/haske-health.webp';
@@ -58,7 +58,7 @@ export const socials = [
   { label: 'GitHub', href: 'https://github.com/DieneDjibril', icon: Github },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/djibril-diene-352a941bb/', icon: Linkedin },
   { label: 'Email', href: `mailto:${personalInfo.email}`, icon: Mail },
-  { label: 'WhatsApp', href: personalInfo.whatsapp, icon: MessageCircle },
+  { label: 'WhatsApp', href: personalInfo.whatsapp, icon: WhatsAppIcon },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -97,7 +97,7 @@ export const hero = {
 export const stats = [
   { value: 3, suffix: '+', label: "ans d'expérience freelance", detail: 'depuis janvier 2023' },
   { value: 6, suffix: '+', label: 'projets web livrés' },
-  { value: 4, prefix: 'Top ', label: 'Afrique en e-sport', detail: 'équipe nationale · Rocket League' },
+  { value: 4, prefix: 'Top ', label: 'Afrique en e-sport', detail: 'équipe nationale · Rocket League · 2026' },
   { value: 3, label: 'langues parlées' },
 ];
 
@@ -326,9 +326,10 @@ export const beyondCode = {
   title: "Head Coach de l'équipe nationale du Sénégal de Rocket League",
   text: [
     "J'ai bâti une méthodologie de coaching de A à Z : cadre de sessions, protocole de communication, suivi des performances par la donnée. J'ai aussi géré la logistique des compétitions internationales (Casablanca, FIFAe).",
-    "Résultat : l'équipe est passée de la phase de groupes à une place dans le top 4 africain.",
+    "Résultat : l'équipe est passée de la phase de groupes à une place dans le top 4 africain en 2026.",
   ],
   highlight: 'Top 4 africain',
+  highlightYear: '2026',
   takeaways: [
     { title: 'Leadership', text: 'Fédérer un groupe autour d’un objectif commun.' },
     { title: 'Méthode', text: 'Des process clairs, du cadre de session au debrief.' },

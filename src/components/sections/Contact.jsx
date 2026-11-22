@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, m } from 'framer-motion';
-import { Copy, Linkedin, Mail, MapPin, MessageCircle, Send, ArrowUpRight, Loader2, ChevronDown } from 'lucide-react';
+import { Copy, Linkedin, Mail, MapPin, Send, ArrowUpRight, Loader2, ChevronDown } from 'lucide-react';
+import { WhatsAppIcon } from '../ui/WhatsAppIcon';
 import { contact, personalInfo, socials } from '../../data/portfolioData';
 import { ease } from '../../lib/utils';
 import { SectionTitle } from '../ui/SectionTitle';
@@ -245,7 +246,7 @@ export function Contact() {
               >
                 <span>
                   <span className="flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-brand-300 uppercase">
-                    <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" /> WhatsApp
+                    <WhatsAppIcon className="h-3.5 w-3.5" aria-hidden="true" /> WhatsApp
                   </span>
                   <span className="mt-2 block font-medium text-text">{personalInfo.phone}</span>
                 </span>
