@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useIsTouch, usePrefersReducedMotion } from '../../hooks/useMediaQuery';
+import { cn } from '../../lib/utils';
 
 /** Enveloppe magnétique : l'élément suit légèrement le curseur (desktop uniquement). */
 export function Magnetic({ children, strength = 0.3, className }) {
@@ -31,7 +32,7 @@ export function Magnetic({ children, strength = 0.3, className }) {
       onPointerMove={onMove}
       onPointerLeave={reset}
       style={disabled ? undefined : { x: sx, y: sy }}
-      className={`inline-block ${className ?? ''}`}
+      className={cn('inline-block', className)}
       data-cursor="hover"
     >
       {children}

@@ -9,7 +9,8 @@ import { Logo } from '../ui/LogoMark';
 import { Button } from '../ui/Button';
 import { Magnetic } from '../ui/Magnetic';
 
-const ids = navLinks.map((l) => l.id);
+// « hero » est observé pour qu'aucun lien ne reste actif en haut de page
+const ids = ['hero', ...navLinks.map((l) => l.id)];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -99,7 +100,7 @@ export function Navbar() {
         {open && (
           <motion.div
             id="mobile-menu"
-            className="fixed inset-x-0 top-16 bottom-0 z-40 flex h-[calc(100dvh-4rem)] flex-col overflow-y-auto bg-ink-950/95 px-4 pt-6 pb-10 backdrop-blur-2xl md:top-[4.5rem] md:h-[calc(100dvh-4.5rem)] lg:hidden"
+            className="fixed inset-x-0 top-16 bottom-0 z-40 flex h-[calc(100dvh-4rem)] flex-col overflow-y-auto bg-ink-950 px-4 pt-6 pb-10 md:top-[4.5rem] md:h-[calc(100dvh-4.5rem)] lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}

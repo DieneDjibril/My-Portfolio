@@ -56,10 +56,10 @@ export function Logo({ className, onClick }) {
     >
       <LogoMark className="h-9 w-9 transition-transform duration-300 group-hover:scale-105" />
       <span className="flex flex-col leading-none">
-        <span className="font-display text-[1.05rem] font-bold tracking-tight text-text">
+        <span className="font-display text-[1.05rem] font-bold tracking-tight whitespace-nowrap text-text">
           Djibril <span className="text-brand-400">Diene</span>
         </span>
-        <span className="mt-1 font-mono text-[0.6rem] tracking-[0.2em] text-muted">FULLSTACK · IT · CYBER</span>
+        <span className="mt-1 font-mono text-[0.6rem] tracking-[0.2em] whitespace-nowrap text-muted">FULLSTACK · IT · CYBER</span>
       </span>
     </a>
   );

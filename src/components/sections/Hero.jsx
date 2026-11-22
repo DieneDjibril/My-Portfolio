@@ -10,19 +10,28 @@ import { Magnetic } from '../ui/Magnetic';
 import { Typewriter } from '../ui/Typewriter';
 import { LogoMark } from '../ui/LogoMark';
 
-/** Découpe « texte *mis en valeur* texte » en mots, avec un drapeau highlight. */
+/**
+ * Découpe « texte *mis en valeur*, texte » en mots { word, highlight, tail }.
+ * La ponctuation collée à un mot mis en valeur (« , » « . ») reste sur le même mot.
+ */
 function splitTitle(title) {
-  return title
+  const words = [];
+  title
     .split(/(\*[^*]+\*)/)
     .filter(Boolean)
-    .flatMap((part) => {
+    .forEach((part) => {
       const highlight = part.startsWith('*');
-      return part
-        .replace(/\*/g, '')
+      const text = part.replace(/\*/g, '');
+      // Ponctuation juste après un mot mis en valeur : on l'accroche à ce mot
+      const prev = words[words.length - 1];
+      const lead = !highlight && prev?.highlight && !text.startsWith(' ') ? text.match(/^\S+/)?.[0] : null;
+      if (lead) prev.tail = lead;
+      (lead ? text.slice(lead.length) : text)
         .split(' ')
         .filter(Boolean)
-        .map((word) => ({ word, highlight }));
+        .forEach((word) => words.push({ word, highlight, tail: '' }));
     });
+  return words;
 }
 
 const words = splitTitle(hero.title);
@@ -48,11 +57,12 @@ export function Hero({ ready = true }) {
 
   const anim = ready ? 'show' : 'hidden';
   const baseDelay = 0.1;
-  const afterTitle = baseDelay + words.length * 0.06 + 0.1;
+  const afterTitle = baseDelay + words.length * 0.05 + 0.1;
 
   return (
     <section
       ref={sectionRef}
+      id="hero"
       onPointerMove={onMove}
       aria-labelledby="hero-title"
       className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-24 pb-16 md:pt-28"
@@ -91,21 +101,22 @@ export function Hero({ ready = true }) {
           {/* Titre mot par mot */}
           <motion.h1
             id="hero-title"
-            className="font-display text-[2.6rem] leading-[1.02] font-extrabold tracking-[-0.035em] text-text sm:text-6xl lg:text-7xl"
+            className="font-display text-[2.6rem] leading-[1.02] font-extrabold tracking-[-0.025em] text-text sm:text-6xl lg:text-7xl"
             initial="hidden"
             animate={anim}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06, delayChildren: baseDelay } } }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: baseDelay } } }}
           >
-            {words.map(({ word, highlight }, i) => (
+            {words.map(({ word, highlight, tail }, i) => (
               <span key={i} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
                 <motion.span
-                  className={`inline-block ${highlight ? 'text-gradient' : ''}`}
+                  className="inline-block"
                   variants={{
                     hidden: { y: '105%', opacity: 0 },
                     show: { y: 0, opacity: 1, transition: { duration: 0.6, ease } },
                   }}
                 >
-                  {word}
+                  <span className={highlight ? 'text-gradient' : undefined}>{word}</span>
+                  {tail}
                 </motion.span>
                 {i < words.length - 1 && ' '}
               </span>

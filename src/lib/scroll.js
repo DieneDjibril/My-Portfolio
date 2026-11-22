@@ -16,7 +16,8 @@ export function scrollToId(id) {
   const target = id === 'top' ? 0 : document.getElementById(id);
   if (target === null) return;
   if (lenis) {
-    lenis.scrollTo(target, { offset: id === 'top' ? 0 : -72, duration: 1.1 });
+    // Le décalage sous la navbar vient de scroll-padding-top (index.css), pris en compte par Lenis
+    lenis.scrollTo(target, { duration: 1.1, force: true });
   } else if (target === 0) {
     window.scrollTo({ top: 0 });
   } else {
