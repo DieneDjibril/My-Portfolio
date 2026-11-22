@@ -4,7 +4,6 @@
  * Pour mettre le site à jour, modifie uniquement ce fichier :
  * les composants lisent ces données et n'ont pas besoin d'être touchés.
  * Les icônes viennent de lucide-react (https://lucide.dev/icons).
- * Les éléments marqués `TODO À CONFIRMER` attendent une validation.
  */
 
 import {
@@ -113,13 +112,6 @@ export const about = {
   ],
   qualities: ['Patience', "Sens de l'analyse", 'Autonomie & curiosité', "Travail en équipe"],
   education: [
-    // TODO À CONFIRMER : Bachelor Cybersécurité ESGI Paris
-    {
-      year: '2027',
-      title: 'Bachelor Cybersécurité (projet)',
-      school: 'ESGI Paris · rentrée janvier 2027',
-      upcoming: true,
-    },
     {
       year: '2024',
       title: 'Certification Analyste Junior en Cybersécurité',
@@ -260,7 +252,7 @@ export const projectFilters = ['Tous', 'Web', 'Fullstack', 'Data'];
 // Images : placeholders dans src/assets/projects/, à remplacer par de vraies captures.
 export const projects = [
   {
-    // TODO À CONFIRMER : accord du client (Haskè Conseil) pour le citer, et URL
+    // URL Netlify provisoire, à remplacer par le domaine définitif
     title: 'Advancing Partnerships Playbook',
     client: 'Plateforme web · cabinet de conseil (Haskè Conseil)',
     description:
@@ -271,7 +263,7 @@ export const projects = [
     link: 'https://advancingpartnershipplaybook.netlify.app',
   },
   {
-    // TODO À CONFIRMER : accord du client (Haskè Conseil) pour le citer, et URL
+    // URL Netlify provisoire, à remplacer par le domaine définitif
     title: 'Haskè Health',
     client: 'Rapports de santé publique · Haskè Conseil',
     description:
@@ -310,7 +302,6 @@ export const projects = [
     image: imgReporting,
   },
   {
-    // TODO À CONFIRMER : URL du repo GitHub de ce portfolio
     title: 'Ce portfolio',
     client: 'Projet personnel',
     description:
@@ -318,7 +309,9 @@ export const projects = [
     tags: ['React', 'Vite', 'Tailwind', 'Framer Motion'],
     category: 'Web',
     image: imgPortfolio,
-    github: 'https://github.com/DieneDjibril/My-Portfolio',
+    // Lien vers le profil GitHub (pas le repo) : libellé adapté
+    github: 'https://github.com/DieneDjibril',
+    githubLabel: 'Mon GitHub',
   },
 ];
 

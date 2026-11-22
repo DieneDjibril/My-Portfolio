@@ -55,7 +55,8 @@ Quelques cas courants :
 - **Changer une icône** : les icônes viennent de [lucide.dev/icons](https://lucide.dev/icons). Importe-la en haut de `portfolioData.js`.
 - **Changer les types de projet du formulaire** : modifie `contact.projectTypes` **et** les `<option>` du formulaire caché dans `index.html` (Netlify lit cette version au build).
 
-Les éléments à valider sont marqués `// TODO À CONFIRMER` dans le fichier.
+Les sites Advancing Partnerships Playbook et Haskè Health pointent vers leurs URLs Netlify provisoires : mets à jour `link` quand les domaines définitifs seront en place.
+Pour un lien GitHub qui ne mène pas au code du projet, ajoute `githubLabel` (ex. `'Mon GitHub'`) ; sinon le bouton affiche « Code source ».
 
 ## Structure
 

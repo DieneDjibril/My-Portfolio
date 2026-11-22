@@ -8,7 +8,7 @@ import { Reveal } from '../ui/Reveal';
 import { TiltCard } from '../ui/TiltCard';
 
 function ProjectCard({ project }) {
-  const { title, client, description, tags, image, link, github } = project;
+  const { title, client, description, tags, image, link, github, githubLabel = 'Code source' } = project;
   return (
     <TiltCard className="flex h-full flex-col overflow-hidden">
       <div className="relative aspect-[16/10] overflow-hidden border-b border-line">
@@ -57,8 +57,10 @@ function ProjectCard({ project }) {
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-text"
               >
-                <Github className="h-4 w-4" aria-hidden="true" /> Code source
-                <span className="sr-only">de {title} (nouvel onglet)</span>
+                <Github className="h-4 w-4" aria-hidden="true" /> {githubLabel}
+                <span className="sr-only">
+                  {githubLabel === 'Code source' ? `de ${title} ` : ''}(nouvel onglet)
+                </span>
               </a>
             )}
           </div>
