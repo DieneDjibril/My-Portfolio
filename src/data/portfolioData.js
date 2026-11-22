@@ -31,7 +31,7 @@ import cvFile from '../assets/CV-Djibril-Diene.pdf';
 import imgPlaybook from '../assets/projects/advancing-partnerships.webp';
 import imgHealth from '../assets/projects/haske-health.webp';
 import imgShop from '../assets/projects/gsce-shop.svg';
-import imgPointage from '../assets/projects/pointage.svg';
+import imgPointage from '../assets/projects/pointage.webp';
 import imgReporting from '../assets/projects/reporting.svg';
 import imgPortfolio from '../assets/projects/portfolio.webp';
 
@@ -282,8 +282,8 @@ export const projects = [
     tags: ['WordPress', 'WooCommerce', 'SEO'],
     category: 'Web',
     image: imgShop,
-    // Domaine gsceshop.com expiré (en vente) : lien retiré, à remettre si le site revient en ligne
-    github: 'https://github.com/DieneDjibril/GSCESHOP',
+    // Domaine gsceshop.com expiré (en vente) : lien retiré, à remettre si le site revient en ligne.
+    // Pas de lien GitHub : le code n'est pas public.
   },
   {
     title: 'Application de pointage',
@@ -293,7 +293,7 @@ export const projects = [
     tags: ['Angular', 'Spring Boot', 'MySQL', 'UML'],
     category: 'Fullstack',
     image: imgPointage,
-    github: 'https://github.com/DieneDjibril/gestion-pointage',
+    // Pas de lien GitHub : le repo est privé (et contient des infos internes à La Poste)
   },
   {
     title: 'Outil de reporting automatisé',
