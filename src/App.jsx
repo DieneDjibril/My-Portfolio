@@ -9,6 +9,10 @@ import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { Hero } from './components/sections/Hero';
 import { Stats } from './components/sections/Stats';
+import { About } from './components/sections/About';
+import { Services } from './components/sections/Services';
+import { Skills } from './components/sections/Skills';
+import { Journey } from './components/sections/Journey';
 
 function shouldPlayIntro() {
   try {
@@ -43,6 +47,10 @@ function App() {
         <main id="main" tabIndex={-1} className="outline-none">
           <Hero ready={!intro} />
           <Stats />
+          <About />
+          <Services />
+          <Skills />
+          <Journey />
         </main>
         <Footer />
       </div>

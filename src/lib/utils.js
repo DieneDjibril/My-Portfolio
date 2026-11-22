@@ -21,3 +21,11 @@ export const stagger = (delay = 0.08) => ({
 
 /** Clé sessionStorage de l'écran d'intro. */
 export const INTRO_KEY = 'dd-intro-seen';
+
+/** Pose la position du curseur dans --mx / --my pour la bordure lumineuse (.spotlight). */
+export function trackPointer(e) {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+  el.style.setProperty('--my', `${e.clientY - r.top}px`);
+}
