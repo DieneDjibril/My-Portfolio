@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { navLinks, socials } from '../../data/portfolioData';
 import { useActiveSection } from '../../hooks/useActiveSection';
@@ -16,9 +16,14 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const active = useActiveSection(ids);
-  const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, 'change', (v) => setScrolled(v > 24));
+  // Verre flouté dès qu'on quitte le haut de page
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Bloque le scroll et écoute Échap quand le menu mobile est ouvert
   useEffect(() => {
@@ -65,7 +70,7 @@ export function Navbar() {
                 )}
               >
                 {active === link.id && (
-                  <motion.span
+                  <m.span
                     layoutId="nav-active"
                     className="absolute inset-0 -z-10 rounded-full border border-brand-400/25 bg-brand-500/10"
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
@@ -98,21 +103,21 @@ export function Navbar() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             id="mobile-menu"
             className="fixed inset-x-0 top-16 bottom-0 z-40 flex h-[calc(100dvh-4rem)] flex-col overflow-y-auto bg-ink-950 px-4 pt-6 pb-10 md:top-[4.5rem] md:h-[calc(100dvh-4.5rem)] lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
           >
-            <motion.ul
+            <m.ul
               className="flex flex-col"
               initial="hidden"
               animate="show"
               variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: 0.05 } } }}
             >
               {navLinks.map((link, i) => (
-                <motion.li
+                <m.li
                   key={link.id}
                   variants={{
                     hidden: { opacity: 0, y: 20 },
@@ -130,11 +135,11 @@ export function Navbar() {
                     <span className="font-mono text-xs font-normal text-muted">0{i + 1}</span>
                     {link.label}
                   </a>
-                </motion.li>
+                </m.li>
               ))}
-            </motion.ul>
+            </m.ul>
 
-            <motion.div
+            <m.div
               className="mt-auto flex flex-col gap-6 pt-10"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.4 } }}
@@ -156,8 +161,8 @@ export function Navbar() {
                   </a>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

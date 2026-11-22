@@ -1,5 +1,6 @@
 import { useRef } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { m, useSpring } from 'framer-motion';
+import { useScrollProgress } from '../../hooks/useScrollProgress';
 import { Briefcase } from 'lucide-react';
 import { journey } from '../../data/portfolioData';
 import { SectionTitle } from '../ui/SectionTitle';
@@ -9,7 +10,7 @@ import { Card } from '../ui/Card';
 export function Journey() {
   const listRef = useRef(null);
   // La ligne se remplit pendant que la timeline traverse l'écran
-  const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 75%', 'end 55%'] });
+  const scrollYProgress = useScrollProgress(listRef, { start: 0.75, end: 0.55 });
   const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 });
 
   return (
@@ -21,7 +22,7 @@ export function Journey() {
         <div ref={listRef} className="relative">
           {/* Rail + remplissage */}
           <div aria-hidden="true" className="absolute top-2 bottom-2 left-[15px] w-px bg-line md:left-[calc(9rem+15px)]" />
-          <motion.div
+          <m.div
             aria-hidden="true"
             style={{ scaleY }}
             className="absolute top-2 bottom-2 left-[15px] w-px origin-top bg-gradient-to-b from-brand-300 via-brand-500 to-brand-700 md:left-[calc(9rem+15px)]"

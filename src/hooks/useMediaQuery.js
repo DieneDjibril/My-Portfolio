@@ -1,14 +1,21 @@
 import { useSyncExternalStore } from 'react';
 
+// Une seule MediaQueryList par requête, partagée par tous les composants
+const lists = new Map();
+function getList(query) {
+  if (!lists.has(query)) lists.set(query, window.matchMedia(query));
+  return lists.get(query);
+}
+
 /** Suit une media query CSS et renvoie true / false (false côté serveur). */
 export function useMediaQuery(query) {
   return useSyncExternalStore(
     (onChange) => {
-      const mql = window.matchMedia(query);
+      const mql = getList(query);
       mql.addEventListener('change', onChange);
       return () => mql.removeEventListener('change', onChange);
     },
-    () => window.matchMedia(query).matches,
+    () => getList(query).matches,
     () => false,
   );
 }

@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 /**
  * Monogramme « D + >_ » (mêmes tracés que src/assets/brand/logo-mark.svg),
@@ -25,14 +25,14 @@ export function LogoMark({ className, draw = false, blink = true, duration = 0.6
           <stop offset="1" stopColor="#2563EB" />
         </linearGradient>
       </defs>
-      <motion.path
+      <m.path
         d="M14 11h15c12 0 21 9 21 21s-9 21-21 21H14z"
         stroke={stroke}
         strokeWidth="6"
         strokeLinejoin="round"
         {...drawProps(0)}
       />
-      <motion.path
+      <m.path
         d="M23 24l8 8-8 8"
         stroke={stroke}
         strokeWidth="5"
@@ -52,7 +52,6 @@ export function Logo({ className, onClick }) {
       href="#top"
       onClick={onClick}
       className={`group inline-flex items-center gap-2.5 ${className ?? ''}`}
-      aria-label="Djibril Diene, retour en haut de page"
     >
       <LogoMark className="h-9 w-9 transition-transform duration-300 group-hover:scale-105" />
       <span className="flex flex-col leading-none">
@@ -61,6 +60,7 @@ export function Logo({ className, onClick }) {
         </span>
         <span className="mt-1 font-mono text-[0.6rem] tracking-[0.2em] whitespace-nowrap text-muted">FULLSTACK · IT · CYBER</span>
       </span>
+      <span className="sr-only">, retour en haut de page</span>
     </a>
   );
 }

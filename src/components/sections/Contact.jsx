@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { Copy, Linkedin, Mail, MapPin, MessageCircle, Send, ArrowUpRight, Loader2, ChevronDown } from 'lucide-react';
 import { contact, personalInfo, socials } from '../../data/portfolioData';
 import { ease } from '../../lib/utils';
@@ -22,7 +22,7 @@ function encode(data) {
 
 function SuccessState({ onReset }) {
   return (
-    <motion.div
+    <m.div
       key="success"
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -33,7 +33,7 @@ function SuccessState({ onReset }) {
     >
       <svg viewBox="0 0 52 52" className="h-16 w-16" aria-hidden="true">
         <circle cx="26" cy="26" r="24" fill="none" stroke="rgba(56,189,248,0.25)" strokeWidth="2" />
-        <motion.path
+        <m.path
           d="M15 27l7 7 15-16"
           fill="none"
           stroke="#7DD3FC"
@@ -50,7 +50,7 @@ function SuccessState({ onReset }) {
       <button type="button" onClick={onReset} className="mt-6 font-mono text-sm text-brand-300 hover:text-text">
         Envoyer un autre message
       </button>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -109,7 +109,7 @@ export function Contact() {
                 {status === 'success' ? (
                   <SuccessState onReset={() => setStatus('idle')} />
                 ) : (
-                  <motion.form
+                  <m.form
                     key="form"
                     name={FORM_NAME}
                     method="POST"
@@ -206,7 +206,7 @@ export function Contact() {
                         L&apos;envoi a échoué. Réessayez, ou écrivez-moi directement à {personalInfo.email}.
                       </p>
                     )}
-                  </motion.form>
+                  </m.form>
                 )}
               </AnimatePresence>
             </Card>

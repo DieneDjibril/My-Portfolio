@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { m, useMotionValue, useSpring } from 'framer-motion';
 import { useIsTouch, usePrefersReducedMotion } from '../../hooks/useMediaQuery';
 import { cn, trackPointer } from '../../lib/utils';
 
@@ -30,7 +30,7 @@ export function TiltCard({ className, children, ...props }) {
   };
 
   return (
-    <motion.article
+    <m.article
       onPointerMove={onMove}
       onPointerLeave={reset}
       style={enabled ? { rotateX: srx, rotateY: sry, transformPerspective: 900 } : undefined}
@@ -38,6 +38,6 @@ export function TiltCard({ className, children, ...props }) {
       {...props}
     >
       {children}
-    </motion.article>
+    </m.article>
   );
 }

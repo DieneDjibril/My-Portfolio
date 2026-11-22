@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { m, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowRight, Download, MapPin } from 'lucide-react';
 import { hero, personalInfo, socials } from '../../data/portfolioData';
 import { useIsTouch, usePrefersReducedMotion } from '../../hooks/useMediaQuery';
@@ -70,7 +70,7 @@ export function Hero({ ready = true }) {
       {/* Fond : halo + grille en perspective */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(37,99,235,0.28),transparent_70%)]" />
-        <motion.div
+        <m.div
           className="absolute top-1/2 left-1/2 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.22),rgba(37,99,235,0.12)_40%,transparent_70%)] blur-2xl"
           style={{ x: hx, y: hy, translateX: '-50%', translateY: '-50%' }}
         />
@@ -83,7 +83,7 @@ export function Hero({ ready = true }) {
       <div className="container-page grid items-center gap-14 lg:grid-cols-[1.35fr_1fr]">
         <div>
           {/* Badge disponibilité */}
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 12 }}
             animate={ready ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.5, ease }}
@@ -96,10 +96,10 @@ export function Hero({ ready = true }) {
             <span className="font-mono font-medium text-brand-300">{hero.badge}</span>
             <span className="hidden h-3 w-px bg-line sm:block" aria-hidden="true" />
             <span className="hidden truncate sm:inline">{personalInfo.status}</span>
-          </motion.p>
+          </m.p>
 
           {/* Titre mot par mot */}
-          <motion.h1
+          <m.h1
             id="hero-title"
             className="font-display text-[2.6rem] leading-[1.02] font-extrabold tracking-[-0.025em] text-text sm:text-6xl lg:text-7xl"
             initial="hidden"
@@ -108,7 +108,7 @@ export function Hero({ ready = true }) {
           >
             {words.map(({ word, highlight, tail }, i) => (
               <span key={i} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
-                <motion.span
+                <m.span
                   className="inline-block"
                   variants={{
                     hidden: { y: '105%', opacity: 0 },
@@ -117,33 +117,33 @@ export function Hero({ ready = true }) {
                 >
                   <span className={highlight ? 'text-gradient' : undefined}>{word}</span>
                   {tail}
-                </motion.span>
+                </m.span>
                 {i < words.length - 1 && ' '}
               </span>
             ))}
-          </motion.h1>
+          </m.h1>
 
           {/* Rôles en effet de frappe */}
-          <motion.p
+          <m.p
             initial={{ opacity: 0 }}
             animate={ready ? { opacity: 1 } : undefined}
             transition={{ delay: afterTitle, duration: 0.4 }}
-            className="mt-6 font-mono text-sm text-brand-300 sm:text-base"
+            className="mt-6 min-h-[1.5em] font-mono text-sm text-brand-300 [contain:content] sm:text-base"
           >
             <span className="text-muted">~/dakar $ </span>
             <Typewriter words={hero.roles} start={ready} className="text-text" />
-          </motion.p>
+          </m.p>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16 }}
             animate={ready ? { opacity: 1, y: 0 } : undefined}
             transition={{ delay: afterTitle + 0.1, duration: 0.6, ease }}
             className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
           >
             {hero.subtitle}
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 16 }}
             animate={ready ? { opacity: 1, y: 0 } : undefined}
             transition={{ delay: afterTitle + 0.2, duration: 0.6, ease }}
@@ -168,9 +168,9 @@ export function Hero({ ready = true }) {
                 {hero.secondaryCta.label}
               </Button>
             </Magnetic>
-          </motion.div>
+          </m.div>
 
-          <motion.ul
+          <m.ul
             initial={{ opacity: 0 }}
             animate={ready ? { opacity: 1 } : undefined}
             transition={{ delay: afterTitle + 0.3, duration: 0.5 }}
@@ -193,11 +193,11 @@ export function Hero({ ready = true }) {
               <MapPin className="h-3.5 w-3.5 text-brand-400" aria-hidden="true" />
               {personalInfo.location}
             </li>
-          </motion.ul>
+          </m.ul>
         </div>
 
         {/* Carte terminal (desktop) */}
-        <motion.div
+        <m.div
           aria-hidden="true"
           initial={{ opacity: 0, y: 24, scale: 0.97 }}
           animate={ready ? { opacity: 1, y: 0, scale: 1 } : undefined}
@@ -239,7 +239,7 @@ export function Hero({ ready = true }) {
               <span className="font-mono text-[0.65rem] tracking-[0.2em] text-muted">FULLSTACK · IT · CYBER</span>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

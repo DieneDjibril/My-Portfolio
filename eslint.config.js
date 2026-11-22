@@ -23,8 +23,8 @@ export default defineConfig([
       },
     },
     rules: {
-      // motion.* et les icônes passées en props (icon: Icon) sont utilisées en JSX
-      'no-unused-vars': ['error', { varsIgnorePattern: '^([A-Z_]|motion$)', argsIgnorePattern: '^[A-Z_]' }],
+      // m.* (framer-motion) et les icônes passées en props (icon: Icon) sont utilisées en JSX
+      'no-unused-vars': ['error', { varsIgnorePattern: '^([A-Z_]|m$)', argsIgnorePattern: '^[A-Z_]' }],
     },
   },
 ])

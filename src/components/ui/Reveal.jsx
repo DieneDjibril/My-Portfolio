@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ease } from '../../lib/utils';
 
 /** Fondu + léger décalage à l'entrée dans l'écran (une seule fois). */
 export function Reveal({ children, delay = 0, y = 24, className, as = 'div' }) {
-  const Comp = motion[as];
+  const Comp = m[as];
   return (
     <Comp
       className={className}

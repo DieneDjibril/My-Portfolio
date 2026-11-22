@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { usePrefersReducedMotion } from '../../hooks/useMediaQuery';
 
 const TYPE_MS = 32;
@@ -50,9 +50,9 @@ export function Typewriter({ words, start = true, className }) {
       <span aria-hidden="true" className="inline-flex items-baseline">
         {reduced ? (
           <AnimatePresence mode="wait">
-            <motion.span key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <m.span key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               {words[index]}
-            </motion.span>
+            </m.span>
           </AnimatePresence>
         ) : (
           <span>{text}</span>

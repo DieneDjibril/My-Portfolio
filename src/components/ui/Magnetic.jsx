@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { m, useMotionValue, useSpring } from 'framer-motion';
 import { useIsTouch, usePrefersReducedMotion } from '../../hooks/useMediaQuery';
 import { cn } from '../../lib/utils';
 
@@ -27,7 +27,7 @@ export function Magnetic({ children, strength = 0.3, className }) {
   };
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       onPointerMove={onMove}
       onPointerLeave={reset}
@@ -36,6 +36,6 @@ export function Magnetic({ children, strength = 0.3, className }) {
       data-cursor="hover"
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { ArrowUpRight, Github } from 'lucide-react';
 import { projectFilters, projects } from '../../data/portfolioData';
 import { cn, ease } from '../../lib/utils';
@@ -97,7 +97,7 @@ export function Projects() {
                 )}
               >
                 {filter === f && (
-                  <motion.span
+                  <m.span
                     layoutId="project-filter"
                     className="bg-signature absolute inset-0 -z-10 rounded-full"
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
@@ -109,10 +109,10 @@ export function Projects() {
           </div>
         </Reveal>
 
-        <motion.ul layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" style={{ perspective: 1200 }}>
+        <m.ul layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" style={{ perspective: 1200 }}>
           <AnimatePresence mode="popLayout" initial={false}>
             {visible.map((p) => (
-              <motion.li
+              <m.li
                 key={p.title}
                 layout
                 initial={{ opacity: 0, y: 20 }}
@@ -123,10 +123,10 @@ export function Projects() {
                 <Reveal className="h-full">
                   <ProjectCard project={p} />
                 </Reveal>
-              </motion.li>
+              </m.li>
             ))}
           </AnimatePresence>
-        </motion.ul>
+        </m.ul>
       </div>
     </section>
   );

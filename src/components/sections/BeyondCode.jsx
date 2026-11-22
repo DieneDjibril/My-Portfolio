@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Trophy, Gamepad2 } from 'lucide-react';
 import { beyondCode } from '../../data/portfolioData';
 import { ease } from '../../lib/utils';
@@ -46,7 +46,7 @@ export function BeyondCode() {
                   <span className="text-brand-300">Top 4</span>
                 </div>
                 <div className="mt-2 h-2 overflow-hidden rounded-full bg-ink-950">
-                  <motion.div
+                  <m.div
                     className="bg-signature h-full w-full origin-left rounded-full"
                     initial={{ scaleX: 0.12 }}
                     whileInView={{ scaleX: 1 }}
