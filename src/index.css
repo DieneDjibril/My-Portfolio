@@ -82,12 +82,6 @@
   .lenis.lenis-stopped {
     overflow: hidden;
   }
-
-  /* Curseur personnalisé : on masque le curseur natif uniquement quand il est actif */
-  html.has-custom-cursor,
-  html.has-custom-cursor * {
-    cursor: none !important;
-  }
 }
 
 /* ------------------------------------------------------------------ */
