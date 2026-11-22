@@ -16,9 +16,9 @@ export function Services() {
           intro="Je vous accompagne sur tout le cycle : conception, développement, maintenance et support."
         />
 
-        <ul className="grid gap-5 md:grid-cols-2">
+        <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {services.map(({ icon: Icon, title, description, tags }, i) => (
-            <Reveal as="li" key={title} delay={(i % 2) * 0.08}>
+            <Reveal as="li" key={title} delay={(i % 3) * 0.08}>
               <Card className="group flex h-full flex-col p-6 sm:p-8">
                 <div className="flex items-start justify-between">
                   <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-brand-400/25 bg-gradient-to-br from-brand-400/20 to-brand-700/20 text-brand-300 transition-transform duration-300 group-hover:-translate-y-0.5">

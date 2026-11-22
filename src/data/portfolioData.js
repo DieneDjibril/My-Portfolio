@@ -24,6 +24,8 @@ import {
   Boxes,
   Headphones,
   Presentation,
+  PenTool,
+  Search,
 } from 'lucide-react';
 
 import { WhatsAppIcon } from '../components/ui/WhatsAppIcon';
@@ -165,6 +167,20 @@ export const services = [
     description:
       'Applications métier fullstack : Angular ou React côté interface, Spring Boot ou Laravel côté serveur, API REST et bases de données.',
     tags: ['Angular', 'Spring Boot', 'Laravel'],
+  },
+  {
+    icon: PenTool,
+    title: 'Design UI/UX',
+    description:
+      "Wireframes, maquettes et prototypes sur Figma avant la première ligne de code : des interfaces claires, pensées pour vos utilisateurs.",
+    tags: ['Figma', 'UI/UX', 'Prototypage'],
+  },
+  {
+    icon: Search,
+    title: 'Optimisation SEO',
+    description:
+      'Référencement naturel de sites vitrines et e-commerce (WordPress, WooCommerce, Shopify) : structure, balises, performance et suivi dans la durée.',
+    tags: ['SEO', 'WordPress', 'Performance'],
   },
   {
     icon: Headphones,
@@ -347,6 +363,7 @@ export const contact = {
   title: 'Un projet ? Parlons-en.',
   intro:
     'Site web, application, support IT ou formation : décrivez-moi votre besoin, je vous réponds rapidement.',
-  projectTypes: ['Site web', 'Application', 'Support IT', 'Formation', 'Autre'],
+  // Doit correspondre aux <option> du formulaire caché dans index.html
+  projectTypes: ['Site web', 'Application', 'Design UI/UX', 'SEO', 'Support IT', 'Formation', 'Autre'],
   privacy: 'Vos informations servent uniquement à vous répondre.',
 };
