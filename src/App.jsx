@@ -13,6 +13,9 @@ import { About } from './components/sections/About';
 import { Services } from './components/sections/Services';
 import { Skills } from './components/sections/Skills';
 import { Journey } from './components/sections/Journey';
+import { Projects } from './components/sections/Projects';
+import { BeyondCode } from './components/sections/BeyondCode';
+import { Contact } from './components/sections/Contact';
 
 function shouldPlayIntro() {
   try {
@@ -51,6 +54,9 @@ function App() {
           <Services />
           <Skills />
           <Journey />
+          <Projects />
+          <BeyondCode />
+          <Contact />
         </main>
         <Footer />
       </div>
