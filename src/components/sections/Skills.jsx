@@ -1,11 +1,9 @@
-import { marqueeTech, skillGroups } from '../../data/portfolioData';
+import { useContent } from '../../i18n/context';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Reveal } from '../ui/Reveal';
 import { Card } from '../ui/Card';
 import { Marquee } from '../ui/Marquee';
-
-const half = Math.ceil(marqueeTech.length / 2);
 
 /**
  * Répartit les groupes en colonnes (effet « masonry »), chaque groupe allant dans la colonne
@@ -49,6 +47,9 @@ function SkillCard({ title, icon: Icon, items, index }) {
 }
 
 export function Skills() {
+  const { marqueeTech, skillGroups, ui } = useContent();
+  const s = ui.sections.skills;
+  const half = Math.ceil(marqueeTech.length / 2);
   const isLg = useMediaQuery('(min-width: 1024px)');
   const isSm = useMediaQuery('(min-width: 640px)');
   const columns = toColumns(skillGroups, isLg ? 3 : isSm ? 2 : 1);
@@ -59,9 +60,9 @@ export function Skills() {
         <SectionTitle
           id="skills-title"
           index="03"
-          kicker="Compétences"
-          title="Une boîte à outils large, du front au réseau."
-          intro="Ce que j'utilise au quotidien pour concevoir, développer, déployer et maintenir."
+          kicker={s.kicker}
+          title={s.title}
+          intro={s.intro}
         />
       </div>
 

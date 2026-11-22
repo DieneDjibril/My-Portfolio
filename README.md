@@ -29,8 +29,19 @@ npm run lint
 
 ## Modifier le contenu
 
-**Tout le texte du site est dans [`src/data/portfolioData.js`](src/data/portfolioData.js).**
+**Tout le texte du site est dans [`src/data/portfolioData.js`](src/data/portfolioData.js) (français) et [`src/data/portfolioData.en.js`](src/data/portfolioData.en.js) (anglais).**
 Les composants lisent ces données : pas besoin de toucher au JSX pour mettre le site à jour.
+**Quand tu modifies un texte, fais-le dans les deux fichiers.** Les liens, coordonnées, icônes et images des projets sont repris automatiquement du fichier français.
+
+### Version anglaise
+
+- Bouton **FR / EN** dans la navbar. La langue s'applique sans recharger la page.
+- Langue de départ : `?lang=en` dans l'URL, sinon le dernier choix du visiteur, sinon la langue de son navigateur (français → FR, autre → EN).
+- Lien direct vers la version anglaise : `https://djibril-diene-portfolio.netlify.app/?lang=en`.
+- `<html lang>`, le titre, la description et l'URL canonique suivent la langue ; `index.html` et `sitemap.xml` déclarent les deux versions (`hreflang`).
+- Les textes d'interface (boutons, formulaire, titres de section) sont dans l'export `ui` de chaque fichier.
+- Le CV n'existe qu'en français : le bouton anglais l'indique (« Download my CV (French) »).
+- Formulaire : les types de projet envoyés à Netlify gardent leur valeur française (`value`), seul le libellé (`label`) est traduit.
 
 | Export | Ce qu'il contrôle |
 |---|---|
@@ -46,6 +57,7 @@ Les composants lisent ces données : pas besoin de toucher au JSX pour mettre le
 | `projectFilters`, `projects` | Filtres et cartes projets (`category` doit être l'un des filtres) |
 | `beyondCode` | Section « Au-delà du code » (coaching e-sport) |
 | `contact` | Titre, intro, types de projet du formulaire, mention de confidentialité |
+| `ui` | Textes de l'interface : boutons, titres de section, formulaire, navbar, footer |
 
 Quelques cas courants :
 
@@ -53,7 +65,7 @@ Quelques cas courants :
 - **Remplacer une capture** : remplace le fichier dans `src/assets/projects/` (même nom, ou mets à jour l'import). Format conseillé : 1600×1000 px (16:10), en `.webp` ou `.jpg`.
 - **Changer le CV** : remplace `src/assets/CV-Djibril-Diene.pdf`.
 - **Changer une icône** : les icônes viennent de [lucide.dev/icons](https://lucide.dev/icons). Importe-la en haut de `portfolioData.js`.
-- **Changer les types de projet du formulaire** : modifie `contact.projectTypes` **et** les `<option>` du formulaire caché dans `index.html` (Netlify lit cette version au build).
+- **Changer les types de projet du formulaire** : modifie `contact.projectTypes` (dans les deux fichiers) **et** les `<option>` du formulaire caché dans `index.html` (Netlify lit cette version au build).
 
 Les sites Advancing Partnerships Playbook et Haskè Health pointent vers leurs URLs Netlify provisoires : mets à jour `link` quand les domaines définitifs seront en place.
 - **Aperçu en direct** : ajoute `preview: true` à un projet qui a un `link` pour afficher le bouton « Aperçu live » (le site s'ouvre dans une fenêtre, vue ordinateur ou mobile). Le site cible doit autoriser l'intégration en iframe : vérifie qu'il n'envoie pas d'en-tête `X-Frame-Options` ni de `frame-ancestors` restrictif (gsceshop.com, par exemple, l'interdisait).
@@ -66,7 +78,9 @@ Pour un lien GitHub qui ne mène pas au code du projet, ajoute `githubLabel` (ex
 src/
 ├── App.jsx                 # Assemble les sections, intro, smooth scroll
 ├── index.css               # Thème (@theme), utilitaires (glass, spotlight…), mouvement réduit
-├── data/portfolioData.js   # ← tout le contenu
+├── data/portfolioData.js   # ← tout le contenu (FR)
+│   portfolioData.en.js     # ← version anglaise
+├── i18n/                   # LanguageProvider (langue active), useContent()
 ├── assets/
 │   ├── brand/              # logo.svg, logo-mark.svg
 │   ├── projects/           # captures des projets (placeholders pour l'instant)

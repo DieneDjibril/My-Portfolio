@@ -1,11 +1,12 @@
-import { stats } from '../../data/portfolioData';
+import { useContent } from '../../i18n/context';
 import { Counter } from '../ui/Counter';
 import { Reveal } from '../ui/Reveal';
 
 /** Bandeau des chiffres clés avec compteurs animés. */
 export function Stats() {
+  const { stats, ui } = useContent();
   return (
-    <section aria-label="Chiffres clés" className="relative py-10 md:py-14">
+    <section aria-label={ui.stats.aria} className="relative py-10 md:py-14">
       <div className="container-page">
         <Reveal className="glass grid grid-cols-2 overflow-hidden rounded-2xl md:grid-cols-4">
           {stats.map((s, i) => (

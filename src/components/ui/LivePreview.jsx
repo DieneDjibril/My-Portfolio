@@ -3,6 +3,7 @@ import { m } from 'framer-motion';
 import { ExternalLink, Loader2, Monitor, Smartphone, X } from 'lucide-react';
 import { getLenis } from '../../lib/scroll';
 import { cn, ease } from '../../lib/utils';
+import { useContent } from '../../i18n/context';
 
 const FOCUSABLE = 'a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
 
@@ -12,6 +13,7 @@ const FOCUSABLE = 'a[href], button:not([disabled]), iframe, [tabindex]:not([tabi
  */
 export function LivePreview({ project, onClose }) {
   const { title, link } = project;
+  const t = useContent().ui.preview;
   const [loaded, setLoaded] = useState(false);
   const [device, setDevice] = useState('desktop');
   const panelRef = useRef(null);
@@ -65,7 +67,7 @@ export function LivePreview({ project, onClose }) {
         ref={panelRef}
         role="dialog"
         aria-modal="true"
-        aria-label={`Aperçu en direct : ${title}`}
+        aria-label={t.dialog(title)}
         className="relative flex h-full w-full max-w-6xl flex-col overflow-hidden border-line bg-ink-900 shadow-2xl shadow-brand-500/10 sm:h-[88vh] sm:rounded-2xl sm:border"
         initial={{ opacity: 0, y: 24, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -85,10 +87,10 @@ export function LivePreview({ project, onClose }) {
             <span className="truncate font-mono text-xs text-muted">{host}</span>
           </div>
 
-          <div role="group" aria-label="Taille d'écran" className="hidden gap-1 rounded-full border border-line p-0.5 md:flex">
+          <div role="group" aria-label={t.screenSize} className="hidden gap-1 rounded-full border border-line p-0.5 md:flex">
             {[
-              { id: 'desktop', label: 'Ordinateur', Icon: Monitor },
-              { id: 'mobile', label: 'Mobile', Icon: Smartphone },
+              { id: 'desktop', label: t.desktop, Icon: Monitor },
+              { id: 'mobile', label: t.mobile, Icon: Smartphone },
             ].map(({ id, label, Icon }) => (
               <button
                 key={id}
@@ -111,7 +113,7 @@ export function LivePreview({ project, onClose }) {
             target="_blank"
             rel="noreferrer"
             className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-muted transition-colors hover:bg-white/5 hover:text-text"
-            aria-label={`Ouvrir ${title} dans un nouvel onglet`}
+            aria-label={t.open(title)}
           >
             <ExternalLink className="h-4 w-4" aria-hidden="true" />
           </a>
@@ -120,7 +122,7 @@ export function LivePreview({ project, onClose }) {
             type="button"
             onClick={onClose}
             className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-muted transition-colors hover:bg-white/5 hover:text-text"
-            aria-label="Fermer l'aperçu"
+            aria-label={t.close}
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </button>
@@ -132,13 +134,13 @@ export function LivePreview({ project, onClose }) {
             <div className="absolute inset-0 grid place-items-center text-sm text-muted">
               <span className="flex items-center gap-2">
                 <Loader2 className="h-5 w-5 animate-spin text-brand-300" aria-hidden="true" />
-                Chargement de {host}…
+                {t.loading(host)}
               </span>
             </div>
           )}
           <iframe
             src={link}
-            title={`Site ${title}`}
+            title={t.frameTitle(title)}
             onLoad={() => setLoaded(true)}
             referrerPolicy="strict-origin-when-cross-origin"
             sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"

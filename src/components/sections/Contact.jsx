@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, m } from 'framer-motion';
 import { Copy, Linkedin, Mail, MapPin, Send, ArrowUpRight, Loader2, ChevronDown } from 'lucide-react';
 import { WhatsAppIcon } from '../ui/WhatsAppIcon';
-import { contact, personalInfo, socials } from '../../data/portfolioData';
+import { useContent } from '../../i18n/context';
 import { ease } from '../../lib/utils';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Reveal } from '../ui/Reveal';
@@ -12,7 +12,6 @@ import { Magnetic } from '../ui/Magnetic';
 import { Toast } from '../ui/Toast';
 
 const FORM_NAME = 'contact';
-const linkedin = socials.find((s) => s.label === 'LinkedIn')?.href;
 
 const field =
   'w-full rounded-xl border border-line bg-ink-950/60 px-4 py-3 text-base text-text placeholder:text-muted/70 transition-colors duration-200 focus:border-brand-400/60 focus:outline-none focus-visible:outline-none focus:ring-2 focus:ring-brand-400/30 sm:text-sm';
@@ -21,7 +20,7 @@ function encode(data) {
   return new URLSearchParams(data).toString();
 }
 
-function SuccessState({ onReset }) {
+function SuccessState({ onReset, t }) {
   return (
     <m.div
       key="success"
@@ -46,16 +45,19 @@ function SuccessState({ onReset }) {
           transition={{ duration: 0.5, delay: 0.15, ease }}
         />
       </svg>
-      <h3 className="mt-6 text-2xl font-bold text-text">Message envoyé !</h3>
-      <p className="mt-2 max-w-sm text-muted">Merci, je vous réponds dans les meilleurs délais.</p>
+      <h3 className="mt-6 text-2xl font-bold text-text">{t.successTitle}</h3>
+      <p className="mt-2 max-w-sm text-muted">{t.successText}</p>
       <button type="button" onClick={onReset} className="mt-6 font-mono text-sm text-brand-300 hover:text-text">
-        Envoyer un autre message
+        {t.again}
       </button>
     </m.div>
   );
 }
 
 export function Contact() {
+  const { contact, personalInfo, socials, ui } = useContent();
+  const t = ui.contactForm;
+  const linkedin = socials.find((s) => s.label === 'LinkedIn')?.href;
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
   const [toast, setToast] = useState('');
   const toastTimer = useRef(null);
@@ -71,7 +73,7 @@ export function Contact() {
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(personalInfo.email);
-      showToast('Adresse email copiée');
+      showToast(t.copied);
     } catch {
       showToast(personalInfo.email);
     }
@@ -100,7 +102,7 @@ export function Contact() {
       <div aria-hidden="true" className="pointer-events-none absolute bottom-[-20%] left-1/2 h-[36rem] w-[60rem] -translate-x-1/2 rounded-full bg-brand-500/15 blur-3xl" />
 
       <div className="container-page">
-        <SectionTitle id="contact-title" index="07" kicker="Contact" title={contact.title} intro={contact.intro} />
+        <SectionTitle id="contact-title" index="07" kicker={ui.sections.contact.kicker} title={contact.title} intro={contact.intro} />
 
         <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
           {/* Formulaire Netlify */}
@@ -108,7 +110,7 @@ export function Contact() {
             <Card className="p-6 sm:p-8">
               <AnimatePresence mode="wait" initial={false}>
                 {status === 'success' ? (
-                  <SuccessState onReset={() => setStatus('idle')} />
+                  <SuccessState t={t} onReset={() => setStatus('idle')} />
                 ) : (
                   <m.form
                     key="form"
@@ -125,20 +127,20 @@ export function Contact() {
                     <input type="hidden" name="form-name" value={FORM_NAME} />
                     <p className="hidden">
                       <label>
-                        Ne pas remplir : <input name="bot-field" tabIndex={-1} autoComplete="off" />
+                        {t.honeypot} <input name="bot-field" tabIndex={-1} autoComplete="off" />
                       </label>
                     </p>
 
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div>
                         <label htmlFor="c-name" className="mb-2 block text-sm font-medium text-text">
-                          Nom
+                          {t.name}
                         </label>
-                        <input id="c-name" name="name" type="text" required autoComplete="name" placeholder="Votre nom" className={field} />
+                        <input id="c-name" name="name" type="text" required autoComplete="name" placeholder={t.namePlaceholder} className={field} />
                       </div>
                       <div>
                         <label htmlFor="c-email" className="mb-2 block text-sm font-medium text-text">
-                          Email
+                          {t.email}
                         </label>
                         <input
                           id="c-email"
@@ -146,7 +148,7 @@ export function Contact() {
                           type="email"
                           required
                           autoComplete="email"
-                          placeholder="vous@exemple.com"
+                          placeholder={t.emailPlaceholder}
                           className={field}
                         />
                       </div>
@@ -154,16 +156,16 @@ export function Contact() {
 
                     <div>
                       <label htmlFor="c-type" className="mb-2 block text-sm font-medium text-text">
-                        Type de projet
+                        {t.type}
                       </label>
                       <div className="relative">
                         <select id="c-type" name="type" required defaultValue="" className={`${field} appearance-none pr-10`}>
                         <option value="" disabled>
-                          Choisir…
+                          {t.choose}
                         </option>
-                        {contact.projectTypes.map((t) => (
-                          <option key={t} value={t}>
-                            {t}
+                        {contact.projectTypes.map(({ value, label }) => (
+                          <option key={value} value={value}>
+                            {label}
                           </option>
                         ))}
                       </select>
@@ -173,14 +175,14 @@ export function Contact() {
 
                     <div>
                       <label htmlFor="c-message" className="mb-2 block text-sm font-medium text-text">
-                        Message
+                        {t.message}
                       </label>
                       <textarea
                         id="c-message"
                         name="message"
                         required
                         rows={5}
-                        placeholder="Parlez-moi de votre projet, de vos délais…"
+                        placeholder={t.messagePlaceholder}
                         className={`${field} resize-y`}
                       />
                     </div>
@@ -191,11 +193,11 @@ export function Contact() {
                         <Button type="submit" disabled={status === 'sending'} className="w-full sm:w-auto">
                           {status === 'sending' ? (
                             <>
-                              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Envoi…
+                              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> {t.sending}
                             </>
                           ) : (
                             <>
-                              Envoyer <Send className="h-4 w-4" aria-hidden="true" />
+                              {t.send} <Send className="h-4 w-4" aria-hidden="true" />
                             </>
                           )}
                         </Button>
@@ -204,7 +206,7 @@ export function Contact() {
 
                     {status === 'error' && (
                       <p role="alert" className="rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
-                        L&apos;envoi a échoué. Réessayez, ou écrivez-moi directement à {personalInfo.email}.
+                        {t.error(personalInfo.email)}
                       </p>
                     )}
                   </m.form>
@@ -227,7 +229,7 @@ export function Contact() {
                   <button
                     type="button"
                     onClick={copyEmail}
-                    aria-label="Copier l'adresse email"
+                    aria-label={t.copy}
                     className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-brand-400/50 hover:text-brand-300"
                   >
                     <Copy className="h-4 w-4" aria-hidden="true" />

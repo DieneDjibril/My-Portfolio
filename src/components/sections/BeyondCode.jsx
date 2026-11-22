@@ -1,12 +1,13 @@
 import { m } from 'framer-motion';
 import { Trophy, Gamepad2 } from 'lucide-react';
-import { beyondCode } from '../../data/portfolioData';
+import { useContent } from '../../i18n/context';
 import { ease } from '../../lib/utils';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Reveal } from '../ui/Reveal';
 import { Card } from '../ui/Card';
 
 export function BeyondCode() {
+  const { beyondCode, ui } = useContent();
   return (
     <section id="beyond" aria-labelledby="beyond-title" className="relative overflow-hidden bg-ink-900 py-24 md:py-32">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/30 to-transparent" />
@@ -34,7 +35,7 @@ export function BeyondCode() {
           <Reveal delay={0.1}>
             <Card className="flex h-full flex-col justify-between gap-8 p-6 sm:p-8">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs tracking-[0.18em] text-brand-300 uppercase">Rocket League · Afrique · {beyondCode.highlightYear}</span>
+                <span className="font-mono text-xs tracking-[0.18em] text-brand-300 uppercase">Rocket League · {ui.beyond.region} · {beyondCode.highlightYear}</span>
                 <Trophy className="h-6 w-6 text-brand-300" aria-hidden="true" />
               </div>
               <p className="font-display text-6xl leading-none font-extrabold tracking-tight text-gradient sm:text-7xl">
@@ -42,7 +43,7 @@ export function BeyondCode() {
               </p>
               <div>
                 <div className="flex justify-between font-mono text-[0.7rem] text-muted">
-                  <span>Phase de groupes</span>
+                  <span>{ui.beyond.groupStage}</span>
                   <span className="text-brand-300">Top 4 · {beyondCode.highlightYear}</span>
                 </div>
                 <div className="mt-2 h-2 overflow-hidden rounded-full bg-ink-950">

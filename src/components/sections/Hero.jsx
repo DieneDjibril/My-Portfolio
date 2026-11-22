@@ -1,7 +1,7 @@
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { m, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowRight, Download, MapPin } from 'lucide-react';
-import { hero, personalInfo, socials } from '../../data/portfolioData';
+import { useContent } from '../../i18n/context';
 import { useIsTouch, usePrefersReducedMotion } from '../../hooks/useMediaQuery';
 import { scrollToId } from '../../lib/scroll';
 import { ease } from '../../lib/utils';
@@ -34,9 +34,9 @@ function splitTitle(title) {
   return words;
 }
 
-const words = splitTitle(hero.title);
-
 export function Hero({ ready = true }) {
+  const { hero, personalInfo, socials, ui, lang } = useContent();
+  const words = useMemo(() => splitTitle(hero.title), [hero.title]);
   const sectionRef = useRef(null);
   const isTouch = useIsTouch();
   const reduced = usePrefersReducedMotion();
@@ -107,7 +107,7 @@ export function Hero({ ready = true }) {
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: baseDelay } } }}
           >
             {words.map(({ word, highlight, tail }, i) => (
-              <span key={i} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
+              <span key={`${lang}-${i}`} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
                 <m.span
                   className="inline-block"
                   variants={{
@@ -131,7 +131,7 @@ export function Hero({ ready = true }) {
             className="mt-6 min-h-[1.5em] font-mono text-sm text-brand-300 [contain:content] sm:text-base"
           >
             <span className="text-muted">~/dakar $ </span>
-            <Typewriter words={hero.roles} start={ready} className="text-text" />
+            <Typewriter key={lang} words={hero.roles} start={ready} className="text-text" />
           </m.p>
 
           <m.p
@@ -227,7 +227,7 @@ export function Hero({ ready = true }) {
                 <span className="text-brand-400">❯</span> <span className="text-text">uptime</span>
               </p>
               <p className="text-muted">
-                support IT <span className="text-brand-300">● en ligne</span> · {personalInfo.location}
+                {ui.hero.supportIt} <span className="text-brand-300">● {ui.hero.online}</span> · {personalInfo.location}
               </p>
               <p className="flex items-center gap-1">
                 <span className="text-brand-400">❯</span>

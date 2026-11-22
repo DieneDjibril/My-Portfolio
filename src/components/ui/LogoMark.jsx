@@ -46,7 +46,7 @@ export function LogoMark({ className, draw = false, blink = true, duration = 0.6
 }
 
 /** Logo complet : monogramme + nom + baseline. */
-export function Logo({ className, onClick }) {
+export function Logo({ className, onClick, label = ', retour en haut de page' }) {
   return (
     <a
       href="#top"
@@ -60,7 +60,7 @@ export function Logo({ className, onClick }) {
         </span>
         <span className="mt-1 font-mono text-[0.6rem] tracking-[0.2em] whitespace-nowrap text-muted">FULLSTACK · IT · CYBER</span>
       </span>
-      <span className="sr-only">, retour en haut de page</span>
+      <span className="sr-only">{label}</span>
     </a>
   );
 }

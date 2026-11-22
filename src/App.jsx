@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { AnimatePresence, LazyMotion, MotionConfig } from 'framer-motion';
 import { INTRO_KEY } from './lib/utils';
+import { useContent } from './i18n/context';
 import { SmoothScroll } from './components/layout/SmoothScroll';
 import { ScrollProgress } from './components/layout/ScrollProgress';
 import { CustomCursor } from './components/layout/CustomCursor';
@@ -33,6 +34,7 @@ const loadFeatures = () => import('./lib/motionFeatures').then((mod) => mod.defa
 function App() {
   const [intro, setIntro] = useState(shouldPlayIntro);
   const endIntro = useCallback(() => setIntro(false), []);
+  const { ui } = useContent();
 
   return (
     <LazyMotion features={loadFeatures} strict>
@@ -42,7 +44,7 @@ function App() {
           href="#main"
           className="fixed top-3 left-3 z-[110] -translate-y-24 rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white focus:translate-y-0"
         >
-          Aller au contenu
+          {ui.skipLink}
         </a>
 
         <SmoothScroll />

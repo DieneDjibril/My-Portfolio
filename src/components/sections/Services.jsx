@@ -1,9 +1,11 @@
-import { services } from '../../data/portfolioData';
+import { useContent } from '../../i18n/context';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Reveal } from '../ui/Reveal';
 import { Card } from '../ui/Card';
 
 export function Services() {
+  const { services, ui } = useContent();
+  const s = ui.sections.services;
   return (
     <section id="services" aria-labelledby="services-title" className="relative bg-ink-900 py-24 md:py-32">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/30 to-transparent" />
@@ -11,9 +13,9 @@ export function Services() {
         <SectionTitle
           id="services-title"
           index="02"
-          kicker="Services"
-          title="De la maquette à la mise en ligne, et après."
-          intro="Je vous accompagne sur tout le cycle : conception, développement, maintenance et support."
+          kicker={s.kicker}
+          title={s.title}
+          intro={s.intro}
         />
 
         <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">

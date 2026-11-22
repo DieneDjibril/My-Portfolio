@@ -2,12 +2,13 @@ import { useRef } from 'react';
 import { m, useSpring } from 'framer-motion';
 import { useScrollProgress } from '../../hooks/useScrollProgress';
 import { Briefcase } from 'lucide-react';
-import { journey } from '../../data/portfolioData';
+import { useContent } from '../../i18n/context';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Reveal } from '../ui/Reveal';
 import { Card } from '../ui/Card';
 
 export function Journey() {
+  const { journey, ui } = useContent();
   const listRef = useRef(null);
   // La ligne se remplit pendant que la timeline traverse l'écran
   const scrollYProgress = useScrollProgress(listRef, { start: 0.75, end: 0.55 });
@@ -17,7 +18,7 @@ export function Journey() {
     <section id="journey" aria-labelledby="journey-title" className="relative bg-ink-900 py-24 md:py-32">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/30 to-transparent" />
       <div className="container-page">
-        <SectionTitle id="journey-title" index="04" kicker="Parcours" title="Mon parcours professionnel." />
+        <SectionTitle id="journey-title" index="04" kicker={ui.sections.journey.kicker} title={ui.sections.journey.title} />
 
         <div ref={listRef} className="relative">
           {/* Rail + remplissage */}
@@ -30,7 +31,7 @@ export function Journey() {
 
           <ol className="space-y-10 md:space-y-12">
             {journey.map((item) => (
-              <li key={item.role} className="relative grid gap-4 pl-12 md:grid-cols-[9rem_1fr] md:gap-0 md:pl-0">
+              <li key={item.period} className="relative grid gap-4 pl-12 md:grid-cols-[9rem_1fr] md:gap-0 md:pl-0">
                 {/* Période (desktop : colonne de gauche) */}
                 <Reveal className="hidden pt-5 pr-8 text-right md:block">
                   <span className="font-mono text-xs leading-relaxed text-brand-300">{item.period}</span>
@@ -51,7 +52,7 @@ export function Journey() {
                       <h3 className="text-xl font-bold text-text sm:text-2xl">{item.role}</h3>
                       {item.current && (
                         <span className="rounded-full border border-brand-400/30 bg-brand-500/10 px-2.5 py-0.5 font-mono text-[0.65rem] tracking-wide text-brand-300 uppercase">
-                          En cours
+                          {ui.journey.current}
                         </span>
                       )}
                     </div>

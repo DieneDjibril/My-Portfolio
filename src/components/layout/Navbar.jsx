@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, m } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
-import { navLinks, socials } from '../../data/portfolioData';
+import { useContent } from '../../i18n/context';
 import { useActiveSection } from '../../hooks/useActiveSection';
 import { getLenis, scrollToId } from '../../lib/scroll';
 import { cn, ease } from '../../lib/utils';
 import { Logo } from '../ui/LogoMark';
 import { Button } from '../ui/Button';
 import { Magnetic } from '../ui/Magnetic';
+import { LanguageSwitch } from '../ui/LanguageSwitch';
 
-// « hero » est observé pour qu'aucun lien ne reste actif en haut de page
-const ids = ['hero', ...navLinks.map((l) => l.id)];
+const ids = ['hero', 'about', 'services', 'skills', 'journey', 'projects', 'contact'];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { navLinks, socials, ui } = useContent();
+  // « hero » est observé pour qu'aucun lien ne reste actif en haut de page (mêmes id dans les deux langues)
   const active = useActiveSection(ids);
 
   // Verre flouté dès qu'on quitte le haut de page
@@ -54,8 +56,8 @@ export function Navbar() {
         scrolled || open ? 'border-line bg-ink-950/70 backdrop-blur-xl' : 'border-transparent bg-transparent',
       )}
     >
-      <nav className="container-page flex h-16 items-center justify-between md:h-[4.5rem]" aria-label="Navigation principale">
-        <Logo onClick={go('top')} />
+      <nav className="container-page flex h-16 items-center justify-between md:h-[4.5rem]" aria-label={ui.nav.aria}>
+        <Logo onClick={go('top')} label={ui.nav.logoHome} />
 
         <ul className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
@@ -83,16 +85,17 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
+          <LanguageSwitch />
           <Magnetic className="hidden sm:inline-block">
             <Button href="#contact" onClick={go('contact')} className="min-h-10 px-5 py-2.5">
-              Me contacter
+              {ui.nav.cta}
             </Button>
           </Magnetic>
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
             className="glass inline-flex h-11 w-11 items-center justify-center rounded-full text-text lg:hidden"
-            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-label={open ? ui.nav.closeMenu : ui.nav.openMenu}
             aria-expanded={open}
             aria-controls="mobile-menu"
           >
@@ -145,7 +148,7 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.4 } }}
             >
               <Button href="#contact" onClick={go('contact')} className="w-full">
-                Me contacter <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                {ui.nav.cta} <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Button>
               <div className="flex justify-center gap-3">
                 {socials.map(({ label, href, icon: Icon }) => (

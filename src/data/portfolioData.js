@@ -263,7 +263,13 @@ export const journey = [
 /* Projets                                                             */
 /* ------------------------------------------------------------------ */
 
-export const projectFilters = ['Tous', 'Web', 'Fullstack', 'Data'];
+// `id` : 'all' ou une valeur de `category` ; `label` : texte du bouton
+export const projectFilters = [
+  { id: 'all', label: 'Tous' },
+  { id: 'Web', label: 'Web' },
+  { id: 'Fullstack', label: 'Fullstack' },
+  { id: 'Data', label: 'Data' },
+];
 
 // Images : placeholders dans src/assets/projects/, à remplacer par de vraies captures.
 export const projects = [
@@ -363,7 +369,115 @@ export const contact = {
   title: 'Un projet ? Parlons-en.',
   intro:
     'Site web, application, support IT ou formation : décrivez-moi votre besoin, je vous réponds rapidement.',
-  // Doit correspondre aux <option> du formulaire caché dans index.html
-  projectTypes: ['Site web', 'Application', 'Design & graphisme', 'SEO', 'Support IT', 'Formation', 'Autre'],
+  // `value` est envoyé à Netlify et doit correspondre aux <option> du formulaire caché dans index.html
+  // (identique dans les deux langues) ; `label` est le texte affiché.
+  projectTypes: [
+    { value: 'Site web', label: 'Site web' },
+    { value: 'Application', label: 'Application' },
+    { value: 'Design & graphisme', label: 'Design & graphisme' },
+    { value: 'SEO', label: 'SEO' },
+    { value: 'Support IT', label: 'Support IT' },
+    { value: 'Formation', label: 'Formation' },
+    { value: 'Autre', label: 'Autre' },
+  ],
   privacy: 'Vos informations servent uniquement à vous répondre.',
+};
+
+/* ------------------------------------------------------------------ */
+/* Textes de l'interface (boutons, titres de section, formulaire…)    */
+/* ------------------------------------------------------------------ */
+
+export const ui = {
+  meta: {
+    title: 'Djibril Diene, Développeur Fullstack & Support IT · Dakar',
+    description:
+      'Djibril Diene, développeur fullstack freelance et technicien support IT basé à Dakar. Sites et applications web modernes, support IT, et une spécialisation progressive en cybersécurité.',
+  },
+  skipLink: 'Aller au contenu',
+  lang: { label: 'Langue du site', fr: 'Français', en: 'English' },
+  nav: {
+    aria: 'Navigation principale',
+    cta: 'Me contacter',
+    openMenu: 'Ouvrir le menu',
+    closeMenu: 'Fermer le menu',
+    logoHome: ', retour en haut de page',
+  },
+  hero: { supportIt: 'support IT', online: 'en ligne' },
+  stats: { aria: 'Chiffres clés' },
+  sections: {
+    about: { kicker: 'À propos', title: 'Du code propre, des systèmes qui tiennent.' },
+    services: {
+      kicker: 'Services',
+      title: 'De la maquette à la mise en ligne, et après.',
+      intro: 'Je vous accompagne sur tout le cycle : conception, développement, maintenance et support.',
+    },
+    skills: {
+      kicker: 'Compétences',
+      title: 'Une boîte à outils large, du front au réseau.',
+      intro: "Ce que j'utilise au quotidien pour concevoir, développer, déployer et maintenir.",
+    },
+    journey: { kicker: 'Parcours', title: 'Mon parcours professionnel.' },
+    projects: {
+      kicker: 'Projets',
+      title: 'Réalisations récentes.',
+      intro: 'Plateformes de contenu, e-commerce, applications métier et outils de reporting.',
+    },
+    contact: { kicker: 'Contact' },
+  },
+  about: {
+    qualities: 'Qualités',
+    languages: 'Langues',
+    interests: "Centres d'intérêt",
+    education: 'Formation',
+    upcoming: 'À venir',
+  },
+  journey: { current: 'En cours' },
+  projects: {
+    filtersAria: 'Filtrer les projets',
+    technologies: 'Technologies',
+    imageAlt: (title) => `Aperçu du projet ${title}`,
+    preview: 'Aperçu live',
+    previewOf: (title) => `Voir l'aperçu en direct de ${title}`,
+    visit: 'Voir le site',
+    source: 'Code source',
+    of: 'de',
+    newTab: 'nouvel onglet',
+  },
+  preview: {
+    dialog: (title) => `Aperçu en direct : ${title}`,
+    screenSize: "Taille d'écran",
+    desktop: 'Ordinateur',
+    mobile: 'Mobile',
+    open: (title) => `Ouvrir ${title} dans un nouvel onglet`,
+    close: "Fermer l'aperçu",
+    loading: (host) => `Chargement de ${host}…`,
+    frameTitle: (title) => `Site ${title}`,
+  },
+  beyond: { region: 'Afrique', groupStage: 'Phase de groupes' },
+  contactForm: {
+    honeypot: 'Ne pas remplir :',
+    name: 'Nom',
+    namePlaceholder: 'Votre nom',
+    email: 'Email',
+    emailPlaceholder: 'vous@exemple.com',
+    type: 'Type de projet',
+    choose: 'Choisir…',
+    message: 'Message',
+    messagePlaceholder: 'Parlez-moi de votre projet, de vos délais…',
+    send: 'Envoyer',
+    sending: 'Envoi…',
+    error: (email) => `L'envoi a échoué. Réessayez, ou écrivez-moi directement à ${email}.`,
+    successTitle: 'Message envoyé !',
+    successText: 'Merci, je vous réponds dans les meilleurs délais.',
+    again: 'Envoyer un autre message',
+    copy: "Copier l'adresse email",
+    copied: 'Adresse email copiée',
+  },
+  footer: {
+    quickLinks: 'Liens rapides',
+    navigation: 'Navigation',
+    socials: 'Réseaux',
+    made: 'Conçu et développé à Dakar.',
+    backToTop: 'Haut de page',
+  },
 };
