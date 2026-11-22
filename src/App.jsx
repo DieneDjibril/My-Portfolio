@@ -7,6 +7,8 @@ import { CustomCursor } from './components/layout/CustomCursor';
 import { IntroScreen } from './components/layout/IntroScreen';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
+import { Hero } from './components/sections/Hero';
+import { Stats } from './components/sections/Stats';
 
 function shouldPlayIntro() {
   try {
@@ -39,7 +41,8 @@ function App() {
       <div id="top" className="relative min-h-screen">
         <Navbar />
         <main id="main" tabIndex={-1} className="outline-none">
-          <div className="container-page py-40 font-display text-4xl text-gradient">Refonte en cours</div>
+          <Hero ready={!intro} />
+          <Stats />
         </main>
         <Footer />
       </div>
